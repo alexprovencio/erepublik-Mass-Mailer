@@ -10,4 +10,4 @@ sed '/^$/d' recipientList > tempRecipientList
 cat tempRecipientList > recipientList
 
 # Convert URLs to messages
-awk 'BEGIN {FS="/";} {print ("<a href=\"" "http://www.erepublik.com/en/messages/compose/" $7 "?message_subject='$1'&message_body='$2'\">" $7 "</a>");}' recipientList > output
+awk 'BEGIN {FS="/";} {print ("<a href=\"" "http://www.erepublik.com/en/messages/compose/" $7 "?message_subject='$1'&message_body='$2'\">" $7 "</a><br />");}' recipientList > output
