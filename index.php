@@ -9,30 +9,46 @@
 </head>
 
 <body>
+<!--<h2>The mass mailer is currently unusable</h2>-->
 
 <?php
 	$recipients = $_POST["recipients"];
-	$subject = urlencode( $_POST["subject"] );
-	$message = urlencode( $_POST["message"] );
-	$recipientList = "recipientList";
+	$subject = stripslashes( $_POST["subject"] );
+	$message = stripslashes( $_POST["message"] );
+	$recipientsFile = "recipientList";
+	$subjectFile = "subject";
+	$messageFile = "message";
 	$outputList = "output";
 	
 	if (isset($_POST['submit'])) {
-		// Write the recipient list to file so we can use shell scripting magic on it because I don't yet know how to make php pipe vars into stdin of scripts.
+		// Write the recipient list to file.
 		// First prevent other things from overwriting the recipient list
 		exec( "./lock.sh" );
-		$fh = fopen( $recipientList, 'w') or die("Can't generate a list of the recipients." );
+		$fh = fopen( $recipientsFile, 'w' ) or die( "Can't generate a list of the recipients." );
 		fwrite( $fh, $recipients );
 		fclose( $fh );
+		// Write the subject and message to file
+		$fh = fopen( $subjectFile, 'w' ) or die( "Can't handle the subject." );
+		fwrite( $fh, $subject );
+		fclose( $fh );
+		$fh = fopen( $messageFile, 'w' ) or die( "Can't handle the message." );
+		fwrite( $fh, $message );
+		fclose( $fh );
+
 		// Now generate the list of links from file
-		exec( "./processList.sh " . $subject . " " . $message );
+		exec( "./processList.sh" );
 		$fh = fopen( $outputList, 'r' ) or die( "Can't read the generated list of the recipients." );
-		if (filesize( $outputList ) > 0) {
-			$output = fread( $fh, filesize( $outputList ) );
+		if ((filesize( $outputList ) == 0) || (strlen( $message ) == 0) || (strlen( $subject ) == 0)) {
+			$output = "Your recipient list, subject, AND message ALL must have things in them!";
 		} else {
-			$output = "Please specify a list of recipients!";
+			$output = fread( $fh, filesize( $outputList ) );
+
 		}
 		fclose ( $fh );
+		
+		// Clear all files
+		exec( "echo '' > " . $recipientsFile . " > " . $subjectFile . " > " . $subjectFile . " > " . $outputList );
+		
 		// Now we let other things overwrite the user list.
 		exec( "./unlock.sh" );
 
@@ -48,17 +64,17 @@
 				echo "<td>";
 	}
 ?>
-
-<p>This mass mailer is a simpler version of <a href="http://erep.thepenry.net/mailer.php">AndraX2000's mass mailer</a>.  For the recipients list, paste in URLs (e.g. http://www.erepublik.com/en/citizen/profile/2 ), one URL per line.</p>
+<p>This mass mailer is a simpler version of <a href="http://erep.thepenry.net/mailer.php">AndraX2000's mass mailer</a>.  For the recipients list, paste in URLs (e.g. 
+http://www.erepublik.com/en/citizen/profile/2 ), one URL per line.  You can also use profile IDs in the form of a "#" with the number afterwards (e.g. #2).</p>
 <form method="post" action="<?php echo $PHP_SELF;?>">
 Recipients: <br />
 <textarea name="recipients" rows="10" cols="52" wrap="off" >
 <?php echo $recipients; ?></textarea><br /><br />
 Subject:<br />
-<input type="text" name="subject" value="<?php echo urldecode( $subject ); ?>" size="52" maxlength="50" /> <br /><br />
+<input type="text" name="subject" value="<?php echo $subject; ?>" size="52" maxlength="50" /> <br /><br />
 Message:<br />
 <textarea name="message" rows="10" cols="52" wrap="soft">
-<?php echo urldecode( $message ); ?></textarea><br />
+<?php echo $message; ?></textarea><br />
 <input type="submit" value="submit" name="submit" />
 </form>
 
