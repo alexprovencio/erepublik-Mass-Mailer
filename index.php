@@ -15,6 +15,7 @@
 	$subject = urlencode( $_POST["subject"] );
 	$message = urlencode( $_POST["message"] );
 	$recipientList = "recipientList";
+	$outputList = "output";
 	
 	if (isset($_POST['submit'])) {
 		// Set up a table for prettier layout.
@@ -26,12 +27,16 @@
 		// First prevent other things from overwriting the file.
 		exec( "./lock.sh" );
 		
-		$fh = fopen($recipientList, 'w') or die("Can't generate a list of the recipients.");
+		$fh = fopen( $recipientList, 'w') or die("Can't generate a list of the recipients." );
 		fwrite( $fh, $recipients );
+		fclose( $fh );
 		
 		 // Now generate the list of links from file
 		echo "<pre>";
-		$output = shell_exec( "./mailer.sh " . $subject . " " . $message );
+		exec( "./mailer.sh " . $subject . " " . $message );
+		$fh = fopen( $outputList, 'r' ) or die( "Can't read the generated list of the recipients." );
+		$output = fread( $fh, filesize( $outputList ) );
+		fclose ( $fh );
 		echo $output;
 		echo "</pre>";
 		
