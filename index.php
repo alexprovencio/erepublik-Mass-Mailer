@@ -24,19 +24,19 @@
 
 		// Write the recipient list to file so we can use shell scripting magic on it because I don't yet know how to make php pipe vars into stdin of scripts.
 		// First prevent other things from overwriting the file.
-		exec( "./lock" );
+		exec( "./lock.sh" );
 		
 		$fh = fopen($recipientList, 'w') or die("Can't generate a list of the recipients.");
 		fwrite( $fh, $recipients );
 		
 		 // Now generate the list of links from file
 		echo "<pre>";
-		$output = shell_exec( "./mailer " . $subject . " " . $message );
+		$output = shell_exec( "./mailer.sh " . $subject . " " . $message );
 		echo $output;
 		echo "</pre>";
 		
 		// Now we let other things overwrite the user list.
-		exec( "./unlock" );
+		exec( "./unlock.sh" );
 		
 		// Continue the table
 		echo "</td>";
