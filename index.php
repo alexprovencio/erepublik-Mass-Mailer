@@ -25,9 +25,13 @@
 		fwrite( $fh, $recipients );
 		fclose( $fh );
 		// Now generate the list of links from file
-		exec( "./mailer.sh " . $subject . " " . $message );
+		exec( "./processList.sh " . $subject . " " . $message );
 		$fh = fopen( $outputList, 'r' ) or die( "Can't read the generated list of the recipients." );
-		$output = fread( $fh, filesize( $outputList ) );
+		if (filesize( $outputList ) > 0) {
+			$output = fread( $fh, filesize( $outputList ) );
+		} else {
+			$output = "Please specify a list of recipients!";
+		}
 		fclose ( $fh );
 		// Now we let other things overwrite the user list.
 		exec( "./unlock.sh" );
