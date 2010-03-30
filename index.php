@@ -12,16 +12,18 @@
 <!--<h2>The mass mailer is currently unusable</h2>-->
 
 <?php
-	$recipients = $_POST["recipients"];
+	$recipients = stripslashes( $_POST["recipients"] );
+	$arrayOne = stripslashes( $_POST["arrayOne"] );
 	$subject = stripslashes( $_POST["subject"] );
 	$message = stripslashes( $_POST["message"] );
 	$recipientsFile = "recipientList";
 	$subjectFile = "subject";
 	$messageFile = "message";
 	$outputList = "output";
+	$arrayOneFile = "arrayOne";
 	
 	if (isset($_POST['submit'])) {
-		// Write the recipient list to file.
+		// Write the recipient list to file
 		// First prevent other things from overwriting the recipient list
 		exec( "./lock.sh" );
 		$fh = fopen( $recipientsFile, 'w' ) or die( "Can't generate a list of the recipients." );
@@ -33,6 +35,10 @@
 		fclose( $fh );
 		$fh = fopen( $messageFile, 'w' ) or die( "Can't handle the message." );
 		fwrite( $fh, $message );
+		fclose( $fh );
+		// Write the arrays to file
+		$fh = fopen( $arrayOneFile, 'w' ) or die( "Can't handle the first array." );
+		fwrite( $fh, $arrayOne );
 		fclose( $fh );
 
 		// Now generate the list of links from file
@@ -47,7 +53,7 @@
 		fclose ( $fh );
 		
 		// Clear all files
-		exec( "echo '' > " . $recipientsFile . " > " . $subjectFile . " > " . $subjectFile . " > " . $outputList );
+		exec( "echo '' > " . $recipientsFile . " > " . $subjectFile . " > " . $subjectFile . " > " . $outputList . " > " . $arrayOneFile);
 		
 		// Now we let other things overwrite the user list.
 		exec( "./unlock.sh" );
@@ -66,7 +72,12 @@
 ?>
 <p>This mass mailer is a simpler version of <a href="http://erep.thepenry.net/mailer.php">AndraX2000's mass mailer</a>.  For the recipients list, paste in URLs (e.g. 
 http://www.erepublik.com/en/citizen/profile/2 ), one URL per line.  You can also use profile IDs in the form of a "#" with the number afterwards (e.g. #2).</p>
+<p>Array one is a pretty cool thing.  For each entry in the recipient list, the string "{{ARRAYONE}}" in the message/subject will be replaced with the corresponding row in the array 
+one list.</p>
 <form method="post" action="<?php echo $PHP_SELF;?>">
+<table>
+<tr valign="top">
+<td>
 Recipients: <br />
 <textarea name="recipients" rows="10" cols="52" wrap="off" >
 <?php echo $recipients; ?></textarea><br /><br />
@@ -76,6 +87,14 @@ Message:<br />
 <textarea name="message" rows="10" cols="52" wrap="soft">
 <?php echo $message; ?></textarea><br />
 <input type="submit" value="submit" name="submit" />
+</td>
+<td>
+Array one:<br />
+<textarea name="arrayOne" rows="10" cols="52" wrap="off" >
+<?php echo $arrayOne; ?></textarea><br /><br />
+</td>
+</tr>
+</table>
 </form>
 
 <p>Bug reports go to lietk12.</p>
