@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Get the url encoded form of the subject
-SUBJECT=`cat subject | ./filters/urltranslate.php encode | ./striplines.sh`
-MESSAGE=`cat message | ./filters/urltranslate.php encode | ./striplines.sh`
+SUBJECT=`cat subject | ./filters/urltranslate.php encode | ./filters/striplines.sh`
+MESSAGE=`cat message | ./filters/urltranslate.php encode | ./filters/striplines.sh`
 
 # Convert profile IDs to message URLs
 LINENUMBER=1

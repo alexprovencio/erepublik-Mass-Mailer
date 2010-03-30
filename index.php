@@ -78,6 +78,8 @@ Message:<br />
 <input type="submit" value="submit" name="submit" />
 </form>
 
+<p>Bug reports go to lietk12.</p>
+
 <?php
 	if (isset($_POST['submit'])) {
 		// Finish the table
