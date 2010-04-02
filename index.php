@@ -13,14 +13,14 @@
 
 <?php
 	$recipients = stripslashes( $_POST["recipients"] );
-	$arrayOne = stripslashes( $_POST["arrayOne"] );
+	$replaceOne = stripslashes( $_POST["replaceOne"] );
 	$subject = stripslashes( $_POST["subject"] );
 	$message = stripslashes( $_POST["message"] );
-	$recipientsFile = "recipientList";
-	$subjectFile = "subject";
-	$messageFile = "message";
+	$recipientsFile = "messageData/recipientList";
+	$subjectFile = "messageData/subject";
+	$messageFile = "messageData/message";
 	$outputList = "output";
-	$arrayOneFile = "arrayOne";
+	$replaceOneFile = "messageData/replaceOne";
 	
 	if (isset($_POST['submit'])) {
 		// Write the recipient list to file
@@ -36,9 +36,9 @@
 		$fh = fopen( $messageFile, 'w' ) or die( "Can't handle the message." );
 		fwrite( $fh, $message );
 		fclose( $fh );
-		// Write the arrays to file
-		$fh = fopen( $arrayOneFile, 'w' ) or die( "Can't handle the first array." );
-		fwrite( $fh, $arrayOne );
+		// Write the replaces to file
+		$fh = fopen( $replaceOneFile, 'w' ) or die( "Can't handle the replace list." );
+		fwrite( $fh, $replaceOne );
 		fclose( $fh );
 
 		// Now generate the list of links from file
@@ -53,7 +53,7 @@
 		fclose ( $fh );
 		
 		// Clear all files
-		exec( "echo '' > " . $recipientsFile . " > " . $subjectFile . " > " . $subjectFile . " > " . $outputList . " > " . $arrayOneFile);
+		exec( "echo '' > messageData/*; echo '' > " . $outputList );
 		
 		// Now we let other things overwrite the user list.
 		exec( "./unlock.sh" );
@@ -72,8 +72,8 @@
 ?>
 <p>This mass mailer is a simpler version of <a href="http://erep.thepenry.net/mailer.php">AndraX2000's mass mailer</a>.  For the recipients list, paste in URLs (e.g. 
 http://www.erepublik.com/en/citizen/profile/2 ), one URL per line.  You can also use profile IDs in the form of a "#" with the number afterwards (e.g. #2).</p>
-<p>Array one is a pretty cool thing.  For each entry in the recipient list, the string "{{ARRAYONE}}" in the message/subject will be replaced with the corresponding row in the array 
-one list.</p>
+<p>ReplaceMe is a pretty cool thing.  For each entry in the recipient list, the string "{{REPLACEME}}" in the message/subject will be replaced with the corresponding row in the ReplaceMe 
+list.</p>
 <form method="post" action="<?php echo $PHP_SELF;?>">
 <table>
 <tr valign="top">
@@ -89,9 +89,9 @@ Message:<br />
 <input type="submit" value="submit" name="submit" />
 </td>
 <td>
-Array one:<br />
-<textarea name="arrayOne" rows="10" cols="52" wrap="off" >
-<?php echo $arrayOne; ?></textarea><br /><br />
+ReplaceMe (replace "{{REPLACEME}}" in the Nth message with the stuff in the Nth line of this box):<br />
+<textarea name="replaceOne" rows="10" cols="52" wrap="off" >
+<?php echo $replaceOne; ?></textarea><br /><br />
 </td>
 </tr>
 </table>

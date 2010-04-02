@@ -1,18 +1,18 @@
 #!/bin/bash
 
 # Convert dos line endings to unix line endings
-cat recipientList | ./filters/crlftolf.sh > tempRecipientList
+cat messageData/recipientList | ./filters/crlftolf.sh > tempRecipientList
 
 # Remove blank lines
-cat tempRecipientList | ./filters/striplines.sh > recipientList
+cat tempRecipientList | ./filters/striplines.sh > messageData/recipientList
 
 # Convert profile URLs to player IDs
-awk 'BEGIN {FS="/";} /http.*/ {print "#" $7;} /#.*/ {print;}' recipientList > tempRecipientList
+awk 'BEGIN {FS="/";} /http.*/ {print "#" $7;} /#.*/ {print;}' messageData/recipientList > tempRecipientList
 
-cat tempRecipientList > recipientList
+cat tempRecipientList > messageData/recipientList
 
 # Clear the tempRecipientList
 echo "" > tempRecipientList
 
 # Convert URLs to messages
-cat recipientList | ./convertList.sh
+cat messageData/recipientList | ./idToUrl.sh
