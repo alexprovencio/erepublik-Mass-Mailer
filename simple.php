@@ -72,7 +72,7 @@
 ?>
 <p>This mass mailer is a simpler version of <a href="http://erep.thepenry.net/mailer.php">AndraX2000's mass mailer</a>.  For the recipients list, paste in URLs (e.g. 
 http://www.erepublik.com/en/citizen/profile/2 ), one URL per line.  You can also use profile IDs in the form of a "#" with the number afterwards (e.g. #2).</p>
-<p>If you are working with extremely gigantic lists of people with really long messages, it is safer to use <a href="..">this mass-mailer</a> instead.</p>
+<p>If you are working with extremely gigantic lists of people with really long messages, it is safer to use <a href="./">this mass-mailer</a> instead.</p>
 <form method="get" action="<?php echo $PHP_SELF;?>">
 <table>
 <tr valign="top">
