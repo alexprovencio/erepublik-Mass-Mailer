@@ -16,3 +16,5 @@ echo "" > tempRecipientList
 
 # Convert URLs to messages
 cat messageData/recipientList | ./idToUrl.sh
+
+echo "" > messageData/*

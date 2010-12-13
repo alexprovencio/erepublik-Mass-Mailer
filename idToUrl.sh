@@ -28,7 +28,7 @@ while read LINE; do
 #	MODIFIEDMESSAGE=`printf "%s" "$MODIFIEDMESSAGE" | sed 's_%7B%7BPROFILENAME%7D%7D_'"${REPLACEENTRY}"'_g'`
 
 	# Generate the URL with html code
-	printf "%s" "$LINE" | awk 'BEGIN {FS="#";} {print ("<a href=\"" "http://www.erepublik.com/en/messages/compose/" $2 "?message_subject='"$MODIFIEDSUBJECT"'&message_body='"$MODIFIEDMESSAGE"'\">" $2 "</a><br />");}' >> output
+	printf "%s" "$LINE" | awk 'BEGIN {FS="#";} {print ("<a target=\"_blank\" href=\"" "http://www.erepublik.com/en/messages/compose/" $2 "?message_subject='"$MODIFIEDSUBJECT"'&message_body='"$MODIFIEDMESSAGE"'\">" $2 "</a><br />");}' >> output
 	((LINENUMBER++))
 done
 
