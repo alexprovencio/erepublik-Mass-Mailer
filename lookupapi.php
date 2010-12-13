@@ -11,7 +11,7 @@ $input = trim ( fgets( $in ) );
 // Do the encoding/decoding
 switch ($direction) {
 	case "getname":
-		$xml = simplexml_load_file("http://api.erepublik.com/v1/feeds/citizens/" . $input);
+		$xml = simplexml_load_file("http://api.erepublik.com/v2/feeds/citizens/" . $input);
 		foreach ($xml->children() as $child) {
 		        if ($child->getName() == "name") {
 		                fwrite( STDOUT,  $child );
@@ -20,7 +20,7 @@ switch ($direction) {
 		}
 		break;
 	case "getid":
-		$xml = simplexml_load_file("http://api.erepublik.com/v1/feeds/citizens/" . $input . "?by_username=true" );
+		$xml = simplexml_load_file("http://api.erepublik.com/v2/feeds/citizen_by_name/xml/" . $input );
 		foreach ($xml->children() as $child) {
 			if ($child->getName() == "id") {
 				fwrite( STDOUT, $child );
