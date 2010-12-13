@@ -12,17 +12,17 @@
 <!--<h2>The mass mailer is currently unusable</h2>-->
 
 <?php
-	$recipients = stripslashes( $_POST["recipients"] );
-	$replaceOne = stripslashes( $_POST["replaceOne"] );
-	$subject = stripslashes( $_POST["subject"] );
-	$message = stripslashes( $_POST["message"] );
+	$recipients = stripslashes( $_GET["recipients"] );
+	$replaceOne = stripslashes( $_GET["replaceOne"] );
+	$subject = stripslashes( $_GET["subject"] );
+	$message = stripslashes( $_GET["message"] );
 	$recipientsFile = "messageData/recipientList";
 	$subjectFile = "messageData/subject";
 	$messageFile = "messageData/message";
 	$outputList = "output";
 	$replaceOneFile = "messageData/replaceOne";
 	
-	if (isset($_POST['submit'])) {
+	if (isset($_GET['submit'])) {
 		// Write the recipient list to file
 		// First prevent other things from overwriting the recipient list
 		exec( "./lock.sh" );
@@ -72,7 +72,8 @@
 ?>
 <p>This mass mailer is a simpler version of <a href="http://erep.thepenry.net/mailer.php">AndraX2000's mass mailer</a>.  For the recipients list, paste in URLs (e.g. 
 http://www.erepublik.com/en/citizen/profile/2 ), one URL per line.  You can also use profile IDs in the form of a "#" with the number afterwards (e.g. #2).</p>
-<form method="post" action="<?php echo $PHP_SELF;?>">
+<p>If you are working with extremely gigantic lists of people with really long messages, it is safer to use <a href="..">this mass-mailer</a> instead.</p>
+<form method="get" action="<?php echo $PHP_SELF;?>">
 <table>
 <tr valign="top">
 <td>
@@ -90,10 +91,11 @@ Message:<br />
 </table>
 </form>
 
-<p>Bug reports go to lietk12.</p>
+<p>Bug reports go to <a href="http://www.erepublik.com/en/citizen/profile/1242030">lietk12</a>.</p>
+<p>This project is being maintained at <a href="https://github.com/lietk12/erepublik-Mass-Mailer/tree/shellscripted">github</a>.</p>
 
 <?php
-	if (isset($_POST['submit'])) {
+	if (isset($_GET['submit'])) {
 		// Finish the table
 				echo "</td>";
 			echo "</tr>";

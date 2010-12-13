@@ -73,7 +73,9 @@
 <p>This mass mailer is a simpler version of <a href="http://erep.thepenry.net/mailer.php">AndraX2000's mass mailer</a>.  For the recipients list, paste in URLs (e.g. 
 http://www.erepublik.com/en/citizen/profile/2 ), one URL per line.  You can also use profile IDs in the form of a "#" with the number afterwards (e.g. #2).</p>
 <p>ReplaceMe is a pretty cool thing.  For each entry in the recipient list, the string "{{REPLACEME}}" in the message/subject will be replaced with the corresponding row in the ReplaceMe 
-list.</p>
+list. If you don't understand ReplaceMe, you can safely ignore it and the "ReplaceMe" box.</p>
+<p>A simpler version of this massmailer without the ReplaceMe feature can be found <a href="./simple">here</a>, but that simpler version might not handle extremely long lists of 
+people.</p>
 <form method="post" action="<?php echo $PHP_SELF;?>">
 <table>
 <tr valign="top">
@@ -97,7 +99,8 @@ ReplaceMe (replace "{{REPLACEME}}" in the Nth message with the stuff in the Nth 
 </table>
 </form>
 
-<p>Bug reports go to lietk12.</p>
+<p>Bug reports go to <a href="http://www.erepublik.com/en/citizen/profile/1242030">lietk12</a>.</p>
+<p>This project is being maintained at <a href="https://github.com/lietk12/erepublik-Mass-Mailer/tree/shellscripted">github</a>.</p>
 
 <?php
 	if (isset($_POST['submit'])) {
