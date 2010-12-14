@@ -9,6 +9,7 @@
 </head>
 
 <body>
+<h1>lietk12's eRepublik Mass Mailer</h1>
 <!--<h2>The mass mailer is currently unusable</h2>-->
 
 <?php
@@ -41,11 +42,13 @@ include 'inputInterface.php';
 				echo "<td>";
 	}
 ?>
-<h1>lietk12's eRepublik Mass Mailer</h1>
 <p>This mass mailer is a simpler version of <a href="http://erep.thepenry.net/mailer.php">AndraX2000's mass mailer</a>.  For the recipients list, as long as you have one player per line, you can use any combination of the following formats to specify the players:
-Player profile URLs (e.g. http://www.erepublik.com/en/citizen/profile/2)
-Player PM URLs (e.g. http://www.erepublik.com/en/messages/compose/2 )
-Profile IDs in the form of a "#" with the number afterwards (e.g. #2).</p>
+<ul>
+<li>Player profile URLs (e.g. http://www.erepublik.com/en/citizen/profile/2)</li>
+<li>Player PM URLs (e.g. http://www.erepublik.com/en/messages/compose/2 )</li>
+<li>Profile IDs in the form of a "#" with the number afterwards (e.g. #2).</li>
+</ul>
+</p>
 <form method="post" action="<?php echo $PHP_SELF;?>">
 <table>
 <tr valign="top">
