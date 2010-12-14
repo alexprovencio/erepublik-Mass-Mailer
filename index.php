@@ -41,8 +41,11 @@ include 'inputInterface.php';
 				echo "<td>";
 	}
 ?>
-<p>This mass mailer is a simpler version of <a href="http://erep.thepenry.net/mailer.php">AndraX2000's mass mailer</a>.  For the recipients list, paste in URLs (e.g. 
-http://www.erepublik.com/en/citizen/profile/2 ), one URL per line.  You can also use profile IDs in the form of a "#" with the number afterwards (e.g. #2).</p>
+<h1>lietk12's eRepublik Mass Mailer</h1>
+<p>This mass mailer is a simpler version of <a href="http://erep.thepenry.net/mailer.php">AndraX2000's mass mailer</a>.  For the recipients list, as long as you have one player per line, you can use any combination of the following formats to specify the players:
+Player profile URLs (e.g. http://www.erepublik.com/en/citizen/profile/2)
+Player PM URLs (e.g. http://www.erepublik.com/en/messages/compose/2 )
+Profile IDs in the form of a "#" with the number afterwards (e.g. #2).</p>
 <form method="post" action="<?php echo $PHP_SELF;?>">
 <table>
 <tr valign="top">
@@ -61,8 +64,7 @@ Message:<br />
 </table>
 </form>
 
-<p>Bug reports go to <a href="http://www.erepublik.com/en/citizen/profile/1242030">lietk12</a>.</p>
-<p>This project is being maintained at <a href="https://github.com/lietk12/erepublik-Mass-Mailer/tree/shellscripted">github</a>.</p>
+<p>Bug reports go to <a href="http://www.erepublik.com/en/citizen/profile/1242030">lietk12</a>.  This project is being maintained at <a href="https://github.com/lietk12/erepublik-Mass-Mailer/tree/shellscripted">github</a>.</p>
 
 <?php
 	if (isset($_POST['submit'])) {
