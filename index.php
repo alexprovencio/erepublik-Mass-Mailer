@@ -20,12 +20,39 @@
 include 'assembler.php';
 include 'outputFormatters.php';
 include 'inputInterface.php';
-
-	$recipients = stripslashes( $_POST["recipients"] );
-	$subject = stripslashes( $_POST["subject"] );
-	$message = stripslashes( $_POST["message"] );
 	
-	if (isset($_POST['submit'])) {
+	$submit = $_GET['submit'];
+	$inputType = $_GET['input'];
+	if ($submit == "submit" || $inputType == "get") {
+		$inputType = "get";
+		$submit = $_GET['submit'];
+	} else {
+		$inputType = "post";
+		$submit = $_POST['submit'];
+	}
+		if (isset($_GET["recipients"]) && !isset($_POST["recipients"])) {
+			$recipients = stripslashes( $_GET["recipients"] );
+		} else {
+			$recipients = stripslashes( $_POST["recipients"] );
+		}
+		if ($_GET["subject"] && !isset($_POST["subject"])) {
+			$subject = stripslashes( $_GET["subject"] );
+		} else {
+			$subject = stripslashes( $_POST["subject"] );
+		}
+		if ($_GET["message"] && !isset($_POST["message"])) {
+			$message = stripslashes( $_GET["message"] );
+		} else {
+			$message = stripslashes( $_POST["message"] );
+		}
+	
+	if ($inputType == "post") {
+		echo 'This mass mailer is a simpler version of <a href="http://erep.thepenry.net/mailer.php">AndraX2000\'s mass mailer</a>; for a version which allows you to bookmark specific recipients/subjects/messages, click <a href="./?input=get&recipients=' . urlencode( $recipients ) . '&subject=' . urlencode( $subject ) . '&message=' . urlencode( $message ) . '">here</a>.</p>';
+	} else {
+		echo '<h2>(Bookmarkable Version)</h2><p>This mass mailer is a bookmarkable version of <a href="./index.php">lietk12\'s mass mailer</a>; for super-long lists of people or long messages, this version may behave strangely, in which case you should use <a href="./?input=post&recipients=' . urlencode( $recipients ) . '&subject=' . urlencode( $subject ) . '&message=' . urlencode( $message ) . '">the other version</a> instead.</p>';
+	}
+	
+	if (isset($submit)) {
 		if ((strlen( $recipients ) == 0) || (strlen( $message ) == 0) || (strlen( $subject ) == 0)) {
 			$output = "Your recipient list, subject, AND message ALL must have things in them!";
 		} else {
@@ -42,18 +69,17 @@ include 'inputInterface.php';
 				echo "<th>Message Data</th>";
 			echo "</tr>";
 			echo "<tr valign=\"top\">";
-				echo "<td><p>" . $output . "</p></td>";
+				echo "<td>" . $output . "</td>";
 				echo "<td>";
 	}
 ?>
-<p>This mass mailer is a simpler version of <a href="http://erep.thepenry.net/mailer.php">AndraX2000's mass mailer</a>; for a version which allows you to bookmark specific recipients/subjects/messages, try <a href="./simple.php">this</a>.  For the recipients list, as long as you have one player per line, you can use any combination of the following formats to specify the players:
+For the recipients list, as long as you have one player per line, you can use any combination of the following formats to specify the players:
 <ul>
 <li>Player profile URLs (e.g. <code>http://www.erepublik.com/en/citizen/profile/2</code> )</li>
 <li>Player PM URLs (e.g. <code>http://www.erepublik.com/en/messages/compose/2</code> )</li>
 <li>Profile IDs in the form of a "#" with the number afterwards (e.g. <code>#2</code> ).</li>
 </ul>
-</p>
-<form method="post" action="<?php echo $PHP_SELF;?>">
+<form method="<?php echo $inputType;?>" action="<?php echo $PHP_SELF;?>">
 <table>
 <tr valign="top">
 <td>
@@ -63,14 +89,14 @@ include 'inputInterface.php';
 <h3>Subject:</h3>
 <input type="text" name="subject" id="subject" value="<?php echo $subject; ?>" size="52" maxlength="50" /> <br /><br />
 <h3>Message:</h3>
-<script type="text/javascript">
-document.write('<textarea name="message" id="message" rows="5" cols="52" wrap="soft">');
-document.write('<?php echo $message; ?></textarea><br />');
-</script>
 <noscript>
 <textarea name="message" id="message" rows="10" cols="52" wrap="soft">
-<?php echo $message; ?></textarea><br />
 </noscript>
+<script type="text/javascript">
+document.write('');
+document.write('<textarea name="message" id="message" rows="5" cols="52" wrap="soft">');
+</script>
+<?php echo $message; ?></textarea><br />
 <input type="submit" value="submit" name="submit" />
 </td>
 </tr>

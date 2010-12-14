@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	/*
 	// Autoresize for message
 	$('#message').autoResize({
 		// On resize:
@@ -7,6 +8,9 @@ $(document).ready(function(){
 		animateCallback : function() { $(this).css({opacity:1}); },
 		animateDuration : 150, extraSpace : 20
 	});
+	*/
+	
+	scaleTextareas();
 	
 	// Textlimit for message
 	jQuery("#message").textlimit('span.counter',2000);
