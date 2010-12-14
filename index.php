@@ -14,6 +14,7 @@
 <?php
 include 'assembler.php';
 include 'outputFormatters.php';
+include 'inputInterface.php';
 
 	$recipients = stripslashes( $_POST["recipients"] );
 	$subject = stripslashes( $_POST["subject"] );
@@ -24,7 +25,10 @@ include 'outputFormatters.php';
 			$output = "Your recipient list, subject, AND message ALL must have things in them!";
 		} else {
 			$recipientIDs = idToIdNum( urlToId( explode( "\n", $recipients ) ) );
-			$output = generateHtmlHrefs( assemble( $recipientIDs, $subject, $message ), $recipientIDs, true );
+			$outputArray = generateHtmlHrefs( assemble( $recipientIDs, $subject, $message, $replacements ), $recipientIDs, true );
+			for ($i = 0; $i < count( $outputArray ); $i++) {
+				$output = $output . $outputArray[$i] . '<br />';
+			}
 		}
 		// Set up a table for prettier layout.
 		echo "<table cellpadding=\"5\">";
