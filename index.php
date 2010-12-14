@@ -97,10 +97,6 @@ For the recipients list, as long as you have one player per line, you can use an
 </table>
 </form>
 
-<p id="footer">Bugs?  Feature requests?  Design suggestions?  Comments?  Please talk to <a href="http://www.erepublik.com/en/citizen/profile/1242030">lietk12</a>!<br />
-This project is being developed at <a 
-href="https://github.com/lietk12/erepublik-Mass-Mailer/tree/shellscripted">github</a>&#151;contact lietk12 if you want to contribute.</p>
-
 <?php
 	if (isset($_POST['submit'])) {
 		// Finish the table
@@ -109,6 +105,9 @@ href="https://github.com/lietk12/erepublik-Mass-Mailer/tree/shellscripted">githu
 		echo "</table>";
 	}
 ?>
+<p id="footer">Bugs?  Feature requests?  Design suggestions?  Comments?  Please talk to <a href="http://www.erepublik.com/en/citizen/profile/1242030">lietk12</a>!<br />
+This project is being developed at <a
+href="https://github.com/lietk12/erepublik-Mass-Mailer/tree/shellscripted">github</a>&#151;contact lietk12 if you want to contribute.</p>
 
 </body>
 
