@@ -89,13 +89,7 @@ For the recipients list, as long as you have one player per line, you can use an
 <h3>Subject:</h3>
 <input type="text" name="subject" id="subject" value="<?php echo $subject; ?>" size="52" maxlength="50" /> <br /><br />
 <h3>Message:</h3>
-<noscript>
 <textarea name="message" id="message" rows="10" cols="52" wrap="soft">
-</noscript>
-<script type="text/javascript">
-document.write('');
-document.write('<textarea name="message" id="message" rows="5" cols="52" wrap="soft">');
-</script>
 <?php echo $message; ?></textarea><br />
 <input type="submit" value="submit" name="submit" />
 </td>
