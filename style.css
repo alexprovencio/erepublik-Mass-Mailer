@@ -2,15 +2,16 @@ body
 {
 	font-family: "Segoe UI", Helvetica, sans-serif;
 	font-size: 100%;
+	color: charcoal;
 	line-height: 1.5em;
 	/* fallback (Opera) */
 	background: #FFFFFF;
 	/* Mozilla: */
-	background: -moz-linear-gradient(top, #FFFFFF, #F0F0F0);
-	/* Chrome, Safari:*/
-	background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#F0F0F0));
+	background: -moz-linear-gradient(top, white, white 50%, #D0D0D0);
+	/*Chrome, Safari:*/
+	background: -webkit-gradient(linear, left 50%, left bottom, from(#FFFFFF), to(#D0D0D0));
 	/* MSIE */
-	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#FFFFFF', EndColorStr='#F0F0F0', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#FFFFFF', EndColorStr='#F8F8F8', GradientType=0);
 }
 
 h1
@@ -27,6 +28,27 @@ h3
 	font-size: 1.1em;
 	font-weight: 600;
 	line-height: 0.5em;
+}
+
+a:link
+{
+	font-weight: 600;
+	color: black;
+}
+
+a:hover
+{
+	color: #555555;
+}
+
+a:active
+{
+	letter-spacing: 0.1em;
+}
+
+a:visited
+{
+	color: #777777;
 }
 
 code
@@ -48,6 +70,16 @@ code
 	border-top-style: solid;
 	border-top-width: 1px;
 	border-top-color: #DEDEDE;
+}
+
+#recipients
+{
+	display:block;
+}
+
+#message
+{
+	display:block;
 }
 
 #footer

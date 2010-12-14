@@ -5,6 +5,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Mass-Mailer</title>
 	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.js"></script>
+	<script type="text/javascript" src="./js/autoresize.jquery.js"></script>
+	<script type="text/javascript" src="./js/autoresize.js"></script>
 </head>
 
 <body>
@@ -55,12 +58,12 @@ to specify the players:
 <tr valign="top">
 <td>
 <h3>Recipients:</h3>
-<textarea name="recipients" rows="10" cols="52" wrap="off" >
+<textarea name="recipients" id="recipients" rows="10" cols="52" wrap="off" >
 <?php echo $recipients; ?></textarea><br /><br />
 <h3>Subject:</h3>
-<input type="text" name="subject" value="<?php echo $subject; ?>" size="52" maxlength="50" /> <br /><br />
+<input type="text" name="subject" id="subject" value="<?php echo $subject; ?>" size="52" maxlength="50" /> <br /><br />
 <h3>Message:</h3>
-<textarea name="message" rows="10" cols="52" wrap="soft">
+<textarea name="message" id="message" rows="5" cols="52" wrap="soft">
 <?php echo $message; ?></textarea><br />
 <input type="submit" value="submit" name="submit" />
 </td>
