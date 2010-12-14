@@ -2,7 +2,7 @@ body
 {
 	font-family: "Segoe UI", Helvetica, sans-serif;
 	font-size: 100%;
-	color: charcoal;
+	color: black;
 	line-height: 1.5em;
 	/* fallback (Opera) */
 	background: #FFFFFF;
@@ -17,17 +17,27 @@ body
 h1
 {
 	font-size: 1.5em;
+	text-align: center;
 }
 
 h2
 {
 	font-size: 1.25em;
+	line-height: 0.5em;
+	text-align: center;
 }
+
 h3
 {
-	font-size: 1.1em;
+	font-size: 1em;
 	font-weight: 600;
-	line-height: 0.5em;
+	line-height: 0.7em;
+	text-align: center;
+}
+
+p
+{
+	text-align: center;
 }
 
 a:link
@@ -58,18 +68,7 @@ code
 	padding-left: 2px;
 	padding-right: 2px;
 	background-color: ghostWhite;
-	border-bottom-style: solid;
-	border-bottom-width: 1px;
-	border-bottom-color: #DEDEDE;
-	border-left-style: solid;
-	border-left-width: 1px;
-	border-left-color: #DEDEDE;
-	border-right-style: solid;
-	border-right-width: 1px;
-	border-right-color: #DEDEDE;
-	border-top-style: solid;
-	border-top-width: 1px;
-	border-top-color: #DEDEDE;
+	border: 1px solid #DEDEDE;
 }
 
 #recipients
@@ -77,9 +76,26 @@ code
 	display:block;
 }
 
+#subject
+{
+	font-family: monospace;
+}
+
 #message
 {
 	display:block;
+}
+
+.profileLink
+{
+	text-align: center;
+}
+
+#submit
+{
+	float: none;
+	display: block;
+	margin: 10px auto;
 }
 
 div.grippie
@@ -97,11 +113,51 @@ div.grippie
 {
 	display:block;
 	margin-bottom:0pt;
-	width:95%;
 	height: 20%;
 }
 
 #footer
 {
 	font-size: 0.8em;
+}
+
+#container
+{
+	border: 1px solid black;
+	display: table;
+	width: 975px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#containerrow
+{
+	outline: none;
+	border: none;
+	display: table-row;
+}
+
+#left, #middle, #right
+{
+	display: table-cell;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	padding-top: 0em;
+	padding-bottom: 0em;
+}
+
+#left
+{
+	text-align: center;
+}
+
+#middle
+{
+	border-right: 1px solid black;
+	border-left: 1px solid black;
+}
+
+#right
+{
+	text-align: left;
 }
