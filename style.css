@@ -1,19 +1,56 @@
 body
 {
+	font-family: "Segoe UI", Helvetica, sans-serif;
 	font-size: 100%;
+	line-height: 1.5em;
+	/* fallback (Opera) */
+	background: #FFFFFF;
+	/* Mozilla: */
+	background: -moz-linear-gradient(top, #FFFFFF, #F0F0F0);
+	/* Chrome, Safari:*/
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#F0F0F0));
+	/* MSIE */
+	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#FFFFFF', EndColorStr='#F0F0F0', GradientType=0);
 }
 
 h1
 {
-	font-size: 1.5 em;
+	font-size: 1.5em;
 }
 
 h2
 {
-	font-size: 1.25 em;
+	font-size: 1.25em;
+}
+h3
+{
+	font-size: 1.1em;
+	font-weight: 600;
+	line-height: 0.5em;
+}
+
+code
+{
+	font-family: Monaco, Consolas, Inconsolata, "Andale Mono", monospace;
+	font-size: 0.75em;
+	padding-left: 2px;
+	padding-right: 2px;
+	background-color: ghostWhite;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #DEDEDE;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-left-color: #DEDEDE;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-right-color: #DEDEDE;
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-top-color: #DEDEDE;
 }
 
 #footer
 {
-	font-size: 0.75 em;
+	font-size: 0.8em;
 }
