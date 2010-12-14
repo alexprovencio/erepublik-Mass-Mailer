@@ -4,8 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Mass-Mailer</title>
-	<style type="text/css">
-	</style>
+	<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
 <body>
@@ -44,9 +43,9 @@ include 'inputInterface.php';
 ?>
 <p>This mass mailer is a simpler version of <a href="http://erep.thepenry.net/mailer.php">AndraX2000's mass mailer</a>; for a version which allows you to bookmark specific recipients/subjects/messages, try <a href="./simple.php">this</a>.  For the recipients list, as long as you have one player per line, you can use any combination of the following formats to specify the players:
 <ul>
-<li>Player profile URLs (e.g. http://www.erepublik.com/en/citizen/profile/2)</li>
+<li>Player profile URLs (e.g. http://www.erepublik.com/en/citizen/profile/2 )</li>
 <li>Player PM URLs (e.g. http://www.erepublik.com/en/messages/compose/2 )</li>
-<li>Profile IDs in the form of a "#" with the number afterwards (e.g. #2).</li>
+<li>Profile IDs in the form of a "#" with the number afterwards (e.g. #2 ).</li>
 </ul>
 </p>
 <form method="post" action="<?php echo $PHP_SELF;?>">
@@ -67,8 +66,7 @@ Message:<br />
 </table>
 </form>
 
-<p>Bug reports go to <a href="http://www.erepublik.com/en/citizen/profile/1242030">lietk12</a>.  This project is being maintained at <a href="https://github.com/lietk12/erepublik-Mass-Mailer/tree/shellscripted">github</a>.</p>
-
+<p id="footer">Did something break?  Do you have an idea for a new feature?  Are you using this mass mailer in a new or special way?  Do you want to integrate this mass mailer with your project?  If so, please talk to <a href="http://www.erepublik.com/en/citizen/profile/1242030">lietk12</a>!  This project is being developed at <a href="https://github.com/lietk12/erepublik-Mass-Mailer/tree/shellscripted">github</a>&#151;talk to lietk12 if you want to contribute.</p>
 <?php
 	if (isset($_POST['submit'])) {
 		// Finish the table
