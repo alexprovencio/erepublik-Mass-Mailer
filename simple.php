@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<h1>lietk12's eRepublik Mass Mailer</h1>
+<h1>lietk12's eRepublik Mass Mailer (the bookmarkable version)</h1>
 <!--<h2>The mass mailer is currently unusable</h2>-->
 
 <?php
@@ -17,11 +17,11 @@ include 'assembler.php';
 include 'outputFormatters.php';
 include 'inputInterface.php';
 
-	$recipients = stripslashes( $_POST["recipients"] );
-	$subject = stripslashes( $_POST["subject"] );
-	$message = stripslashes( $_POST["message"] );
+	$recipients = stripslashes( $_GET["recipients"] );
+	$subject = stripslashes( $_GET["subject"] );
+	$message = stripslashes( $_GET["message"] );
 	
-	if (isset($_POST['submit'])) {
+	if (isset($_GET['submit'])) {
 		if ((strlen( $recipients ) == 0) || (strlen( $message ) == 0) || (strlen( $subject ) == 0)) {
 			$output = "Your recipient list, subject, AND message ALL must have things in them!";
 		} else {
@@ -42,14 +42,14 @@ include 'inputInterface.php';
 				echo "<td>";
 	}
 ?>
-<p>This mass mailer is a simpler version of <a href="http://erep.thepenry.net/mailer.php">AndraX2000's mass mailer</a>; for a version which allows you to bookmark specific recipients/subjects/messages, try <a href="./simple.php">this</a>.  For the recipients list, as long as you have one player per line, you can use any combination of the following formats to specify the players:
+<p>This mass mailer is a bookmarkable version of <a href="./index.php">lietk12's mass mailer</a>; for super-long lists of people, this version may behave strangely, in which case you should use <a href="./index.php">the other version</a> instead.  For the recipients list, as long as you have one player per line, you can use any combination of the following formats to specify the players:
 <ul>
 <li>Player profile URLs (e.g. http://www.erepublik.com/en/citizen/profile/2)</li>
 <li>Player PM URLs (e.g. http://www.erepublik.com/en/messages/compose/2 )</li>
 <li>Profile IDs in the form of a "#" with the number afterwards (e.g. #2).</li>
 </ul>
 </p>
-<form method="post" action="<?php echo $PHP_SELF;?>">
+<form method="GET" action="<?php echo $PHP_SELF;?>">
 <table>
 <tr valign="top">
 <td>
@@ -70,7 +70,7 @@ Message:<br />
 <p>Bug reports go to <a href="http://www.erepublik.com/en/citizen/profile/1242030">lietk12</a>.  This project is being maintained at <a href="https://github.com/lietk12/erepublik-Mass-Mailer/tree/shellscripted">github</a>.</p>
 
 <?php
-	if (isset($_POST['submit'])) {
+	if (isset($_GET['submit'])) {
 		// Finish the table
 				echo "</td>";
 			echo "</tr>";
