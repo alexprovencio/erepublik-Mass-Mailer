@@ -61,7 +61,8 @@ Message:<br />
 </table>
 </form>
 
-<p>Bug reports go to lietk12.</p>
+<p>Bug reports go to <a href="http://www.erepublik.com/en/citizen/profile/1242030">lietk12</a>.</p>
+<p>This project is being maintained at <a href="https://github.com/lietk12/erepublik-Mass-Mailer/tree/shellscripted">github</a>.</p>
 
 <?php
 	if (isset($_POST['submit'])) {
