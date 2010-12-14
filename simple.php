@@ -63,8 +63,14 @@ to specify the players:
 <h3>Subject:</h3>
 <input type="text" name="subject" id="subject" value="<?php echo $subject; ?>" size="52" maxlength="50" /> <br /><br />
 <h3>Message:</h3>
-<textarea name="message" id="message" rows="5" cols="52" wrap="soft">
+<script type="text/javascript">
+document.write('<textarea name="message" id="message" rows="5" cols="52" wrap="soft">');
+document.write('<?php echo $message; ?></textarea><br />');
+</script>
+<noscript>
+<textarea name="message" id="message" rows="10" cols="52" wrap="soft">
 <?php echo $message; ?></textarea><br />
+</noscript>
 <input type="submit" value="submit" name="submit" />
 </td>
 </tr>
