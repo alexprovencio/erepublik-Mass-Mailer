@@ -6,8 +6,10 @@
 	<title>Mass-Mailer</title>
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.js"></script>
-	<script type="text/javascript" src="./js/autoresize.jquery.js"></script>
 	<script type="text/javascript" src="./js/autoresize.js"></script>
+	<script type="text/javascript" src="./js/textlimit.js"></script>
+	<script type="text/javascript" src="./js/textarearesizer.js"></script>
+	<script type="text/javascript" src="./js/plugins.js"></script>
 </head>
 
 <body>
@@ -58,7 +60,7 @@ to specify the players:
 <tr valign="top">
 <td>
 <h3>Recipients:</h3>
-<textarea name="recipients" id="recipients" rows="10" cols="52" wrap="off" >
+<textarea name="recipients" id="recipients" class="resizable" rows="10" cols="52" wrap="off" >
 <?php echo $recipients; ?></textarea><br /><br />
 <h3>Subject:</h3>
 <input type="text" name="subject" id="subject" value="<?php echo $subject; ?>" size="52" maxlength="50" /> <br /><br />
