@@ -79,7 +79,7 @@ For the recipients list, as long as you have one player per line, you can use an
 <li>Player PM URLs (e.g. <code>http://www.erepublik.com/en/messages/compose/2</code> )</li>
 <li>Profile IDs in the form of a "#" with the number afterwards (e.g. <code>#2</code> ).</li>
 </ul>
-<form method="<?php echo $inputType;?>" action="<?php echo $PHP_SELF;?>">
+<form method="<?php echo $inputType;?>" action="./">
 <table>
 <tr valign="top">
 <td>
