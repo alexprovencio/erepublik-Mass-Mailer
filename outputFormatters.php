@@ -1,11 +1,11 @@
 <?php
 
-function generateHtmlHrefs( $messageUrls, $profileIDs, $whetherToOpenInNewWindow ) {
+function generateHtmlHrefs( $messageUrls, $profileIDs, $target ) {
 	for ($i = 0; $i < count( $messageUrls ); $i++) {
-		if ( $whetherToOpenInNewWindow ) {
-			$outputs[$i] = '<a href="' . $messageUrls[$i] . '" class="profileLink" target="_blank">' . $profileIDs[$i] . '</a>';
+		if ( !isset($target) ) {
+			$outputs[$i] = '<a href="' . $messageUrls[$i] . '" class="profileLink">' . $profileIDs[$i] . '</a>';
 		} else {
-			$outputs[$i] =  '<a href="' . $messageUrls[$i] . '" class="profileLink">' . $profileIDs[$i] . '</a>';
+			$outputs[$i] =  '<a href="' . $messageUrls[$i] . '" class="profileLink" target="' . $target . '">' . $profileIDs[$i] . '</a>';
 		}
 	}
 	

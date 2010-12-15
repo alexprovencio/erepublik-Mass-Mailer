@@ -19,6 +19,7 @@ include 'assembler.php';
 include 'outputFormatters.php';
 include 'inputInterface.php';
 	
+	// Handle post/get input type conversion
 	$submit = $_GET['submit'];
 	$inputType = $_GET['input'];
 	if ($submit == "Generate" || $inputType == "get") {
@@ -28,21 +29,28 @@ include 'inputInterface.php';
 		$inputType = "post";
 		$submit = $_POST['submit'];
 	}
-		if (isset($_GET["recipients"]) && !isset($_POST["recipients"])) {
-			$recipients = stripslashes( $_GET["recipients"] );
-		} else {
-			$recipients = stripslashes( $_POST["recipients"] );
-		}
-		if ($_GET["subject"] && !isset($_POST["subject"])) {
-			$subject = stripslashes( $_GET["subject"] );
-		} else {
-			$subject = stripslashes( $_POST["subject"] );
-		}
-		if ($_GET["message"] && !isset($_POST["message"])) {
-			$message = stripslashes( $_GET["message"] );
-		} else {
-			$message = stripslashes( $_POST["message"] );
-		}
+	
+	// Get data; post data always takes precedence
+	if (isset($_POST["recipients"])) {
+		$recipients = stripslashes( $_POST["recipients"] );
+	} else {
+		$recipients = stripslashes( $_GET["recipients"] );
+	}
+	if (isset($_POST["subject"])) {
+		$subject = stripslashes( $_POST["subject"] );
+	} else {
+		$subject = stripslashes( $_GET["subject"] );
+	}
+	if (isset($_POST["message"])) {
+		$message = stripslashes( $_POST["message"] );
+	} else {
+		$message = stripslashes( $_GET["message"] );
+	}
+	if (isset($_POST["target"])) {
+		$targetmode = stripslashes( $_POST["target"] );
+	} else {
+		$targetmode = stripslashes( $_GET["target"] );
+	}
 ?>
 
 <h1>lietk12's eRepublik Mass Mailer (v0.5)</h1>
@@ -62,8 +70,23 @@ include 'inputInterface.php';
 		if ((strlen( $recipients ) == 0) || (strlen( $message ) == 0) || (strlen( $subject ) == 0)) {
 			$output = "Your recipient list, subject, AND message ALL must have things in them!";
 		} else {
+			// Convert target mode to actual target values
+			switch ($targetmode) {
+				case "self":
+					$target = "" ;
+					break;
+				case "new":
+					$target = "_blank";
+					break;
+				case "one":
+					$target = "one";
+					break;
+			}
+			// Split recipients list into an array
 			$recipientIDs = idToIdNum( urlToId( explode( "\n", $recipients ) ) );
-			$outputArray = generateHtmlHrefs( assemble( $recipientIDs, $subject, $message, $replacements ), $recipientIDs, true );
+			// Generate link array
+			$outputArray = generateHtmlHrefs( assemble( $recipientIDs, $subject, $message, $replacements ), $recipientIDs, $target );
+			// Print array
 			for ($i = 0; $i < count( $outputArray ); $i++) {
 				$output = $output . $outputArray[$i] . '<br />';
 			}
@@ -90,6 +113,13 @@ include 'inputInterface.php';
 <h3>Message:</h3>
 <textarea name="message" id="message" rows="10" cols="52" wrap="soft">
 <?php echo $message; ?></textarea>
+<h2>Options:</h2>
+Links, when left-clicked, will 
+<select name="target">
+	<option value="self" <?php if ($targetmode == "self") {echo 'selected="selected"';}?>>open in this tab</option>
+	<option value="new" <?php if ($targetmode == "new") {echo 'selected="selected"';}?>>open a new tab for each link</option>
+	<option value="one" <?php if ($targetmode == "one") {echo 'selected="selected"';}?>>all go into one new tab</option>
+</select>
 
 <input type="submit" id = "submit" value="Generate" name="submit" />
 </div>
