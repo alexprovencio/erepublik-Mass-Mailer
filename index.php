@@ -3,7 +3,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Mass-Mailer</title>
+	<title>eRepublik Mass Mailer</title>
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.js"></script>
 	<script type="text/javascript" src="./js/autoresize.js"></script>
@@ -45,7 +45,7 @@ include 'inputInterface.php';
 		}
 ?>
 
-<h1>lietk12's eRepublik Mass Mailer</h1>
+<h1>lietk12's eRepublik Mass Mailer (v0.5)</h1>
 
 <?php
 	if ($inputType == "post") {
@@ -117,8 +117,7 @@ Blah.
 </div>
 
 <p id="footer">Bugs?  Feature requests?  Design suggestions?  Comments?  Please talk to <a href="http://www.erepublik.com/en/citizen/profile/1242030">lietk12</a>!<br />
-This project is being developed at <a
-href="https://github.com/lietk12/erepublik-Mass-Mailer/tree/shellscripted">github</a>&#151;contact lietk12 if you want to contribute.</p>
+This project is being developed at <a href="https://github.com/lietk12/erepublik-Mass-Mailer">github</a>&#151;contact lietk12 if you want to contribute.</p>
 
 </body>
 
