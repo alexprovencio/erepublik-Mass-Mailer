@@ -132,7 +132,7 @@ The list of links should go
 	<option value="column" <?php if ($outputmode == "column") {echo 'selected="selected"';}?>>in a column to the left</option>
 	<option value="new" <?php if ($outputmode == "new") {echo 'selected="selected"';}?>>in a new tab</option>
 	<option value="self" <?php if ($outputmode == "self") {echo 'selected="selected"';}?>>in this tab as a new page</option>
-</select><br /> (Note: this feature is currently nonfunctional)
+</select>
 <br />
 Links, when left-clicked, will 
 <select name="target">
