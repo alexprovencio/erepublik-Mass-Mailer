@@ -117,14 +117,14 @@ include 'inputInterface.php';
 <div id="middle">
 <h2>Message Data</h2>
 <h3>Recipients:</h3>
-<textarea name="recipients" id="recipients" class="resizable" rows="10" cols="52" required="required" <!--Stupid non-html5 attribute-->wrap="off">
+<textarea name="recipients" id="recipients" class="resizable" rows="10" cols="52" required="required" wrap="off" placeholder="Remember, one URL/ID number per line!  By the way, unless you disabled javascript, you can grab the gray bar at the bottom of this box to resize it.">
 <?php echo $recipients; ?></textarea>
 
 <h3>Subject:</h3>
-<input type="text" name="subject" id="subject" value="<?php echo $subject; ?>" size="54" maxlength="50" required="required" placeholder="This is, like, the subject of the message,  yo" />
+<input type="text" name="subject" id="subject" value="<?php echo $subject; ?>" size="54" maxlength="50" required="required" placeholder="This is, like, the subject, yo (50 letter limit)" />
 
 <h3>Message:</h3>
-<textarea name="message" id="message" rows="10" cols="52" maxlength="2000" wrap="soft" required="required" placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.">
+<textarea name="message" id="message" rows="10" cols="52" maxlength="2000" wrap="soft" required="required" placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip blahblahblah.  Unless you disabled javascript, this box will autoresize to fit your message.  Your message must be shorter than 2000 characters.">
 <?php echo $message; ?></textarea>
 <h2>Options</h2>
 The list of links should go
@@ -149,9 +149,9 @@ Links, when left-clicked, will
 	<h2>Notes</h2>
 	For the recipients list, as long as you have one player per line, you can use any combination of the following formats to specify the players:
 	<ul>
-		<li>Player profile URLs (e.g. <code>http://www.erepublik.com/en/citizen/profile/2</code> )</li>
-		<li>Player PM URLs (e.g. <code>http://www.erepublik.com/en/messages/compose/2</code> )</li>
-		<li>Profile IDs in the form of a "#" with the number afterwards (e.g. <code>#2</code> ).</li>
+		<li>Player profile URLs (e.g. <code>http://www.erepublik.com/en/citizen/profile/<?php echo rand(2, 4225400);?></code> )</li>
+		<li>Player PM URLs (e.g. <code>http://www.erepublik.com/en/messages/compose/<?php echo rand(2, 4225400);?></code> )</li>
+		<li>Profile IDs in the form of a "#" with the number afterwards (e.g. <code>#<?php echo rand(2, 4225400);?></code> ).</li>
 	</ul>
 </div>
 <!--
