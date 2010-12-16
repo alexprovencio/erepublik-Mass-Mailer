@@ -2,7 +2,6 @@ body
 {
 	font-family: "Segoe UI", Helvetica, sans-serif;
 	font-size: 100%;
-	color: black;
 	line-height: 1.5em;
 	/* fallback (Opera) */
 	background: #FFFFFF;
@@ -67,13 +66,14 @@ code
 	font-size: 0.75em;
 	padding-left: 2px;
 	padding-right: 2px;
-	background-color: ghostWhite;
+	background-color: #F8F8FF;
 	border: 1px solid #DEDEDE;
 }
 
 #recipients
 {
 	display:block;
+	white-space: nowrap;
 }
 
 #subject

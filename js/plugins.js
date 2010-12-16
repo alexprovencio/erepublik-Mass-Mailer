@@ -12,9 +12,6 @@ $(document).ready(function(){
 	
 	scaleTextareas();
 	
-	// Textlimit for message
-	jQuery("#message").textlimit('span.counter',2000);
-	
 	// Manual resize
 	$('textarea.resizable:not(.processed)').TextAreaResizer();
 });
