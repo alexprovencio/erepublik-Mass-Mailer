@@ -5,9 +5,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>eRepublik Mass Mailer</title>
 	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="stylesheet" type="text/css" href="./js/tipsy.css" />
+	<link rel="stylesheet" href="webfonts/stylesheet.css" type="text/css" charset="utf-8" />
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.js"></script>
 	<script type="text/javascript" src="./js/autoresize.js"></script>
 	<script type="text/javascript" src="./js/textarearesizer.js"></script>
+	<script type="text/javascript" src="./js/tipsy.js"></script>
 	<script type="text/javascript" src="./js/plugins.js"></script>
 </head>
 
@@ -95,7 +98,7 @@
 
 <?php
 	if ($inputType == "post") {
-		echo '<p class="centered">This mass mailer is an alternative to <a href="http://erep.thepenry.net/mailer.php">AndraX2000\'s mass mailer</a>, which is currently missing in action.';
+		echo '<p class="centered">This mass mailer is an alternative to <a href="http://erep.thepenry.net/mailer.php" class="testing">AndraX2000\'s mass mailer</a>, which is currently missing in action.';
 		// If the url has string length of 8000 or more, don't offer this option
 		if (strlen( $recipients . $message . $subject . $replacements ) < 8000) {
 			echo '  For a version which allows you to bookmark specific recipients/subjects/messages, click <a href="./?input=get&amp;' . $params . '">here</a>.</p>';
@@ -103,7 +106,7 @@
 			echo '</p>';
 		}
 	} else {
-		echo '<h2>(Bookmarkable Version)</h2><p class="centered">This mass mailer is a bookmarkable version of <a href="./index.php">lietk12\'s mass mailer</a>; for super-long lists of people or long messages, this version may behave strangely, in which case you should use <a href="./?input=post&amp' . $params . '">the other version</a> instead.</p>';
+		echo '<h2>(Bookmarkable Version)</h2><p class="centered">This mass mailer is a bookmarkable version of <a href="./index.php">lietk12\'s mass mailer</a>; for super-long lists of people or long messages, this version may behave strangely, in which case you should use <a href="./?input=post&amp;' . $params . '">the other version</a> instead.</p>';
 	}
 ?>
 
@@ -119,23 +122,24 @@
 	}
 ?>
 
-<form method="<?php echo $inputType;?>" action="./">
+<form method="<?php echo $inputType;?>" id="hasInfo" action="./">
 
 <div id="middle">
 <h2>Message Data</h2>
 <h3>Recipients:</h3>
-<textarea name="recipients" id="recipients" class="resizable" rows="10" cols="52" required="required" wrap="off" placeholder="Remember, one URL/ID number per line!  By the way, unless you disabled javascript, you can grab the gray bar at the bottom of this box to resize it.">
+<textarea name="recipients" id="recipients" class="resizable" rows="10" cols="52" required="required" wrap="off" title="Remember, one URL/ID number per line!  By the way, unless you disabled javascript, you can grab the gray bar at the bottom of this box to resize it.">
 <?php echo $recipients; ?></textarea>
 
 <h3>Subject:</h3>
-<input type="text" name="subject" id="subject" value="<?php echo $subject; ?>" size="54" maxlength="50" required="required" placeholder="This is, like, the subject, yo (50 letter limit)" />
+<input type="text" name="subject" id="subject" value="<?php echo $subject; ?>" size="54" maxlength="50" required="required" placeholder="This is, like, the subject, yo!" title="Your subject must be at most 50 characters long." />
 
 <h3>Message:</h3>
-<textarea name="message" id="message" rows="10" cols="52" maxlength="2000" wrap="soft" required="required" placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip blahblahblah.  Unless you disabled javascript, this box will autoresize to fit your message.  Your message must be shorter than 2000 characters.">
+<textarea name="message" id="message" rows="10" cols="52" maxlength="2000" wrap="soft" required="required" placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip blahblahblah." title="Unless you disabled javascript, this box will autoresize to fit your message.  Your message must be shorter than 2000 characters.">
 <?php echo $message; ?></textarea>
+
 <h2>Options</h2>
 Links, when left-clicked, will 
-<select name="target">
+<select name="target" >
 	<option value="self" <?php if ($targetmode == "self") {echo 'selected="selected"';}?>>open in this tab/window</option>
 	<option value="new" <?php if ($targetmode == "new") {echo 'selected="selected"';}?>>open a new tab for each link</option>
 	<option value="one" <?php if ($targetmode == "one") {echo 'selected="selected"';}?>>all go into one new tab</option>

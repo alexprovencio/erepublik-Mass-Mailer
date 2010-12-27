@@ -1,17 +1,12 @@
 $(document).ready(function(){
-	/*
 	// Autoresize for message
-	$('#message').autoResize({
-		// On resize:
-		onResize : function() { $(this).css({opacity:0.8}); },
-		// After resize:
-		animateCallback : function() { $(this).css({opacity:1}); },
-		animateDuration : 150, extraSpace : 20
-	});
-	*/
-	
 	scaleTextareas();
 	
 	// Manual resize
 	$('textarea.resizable:not(.processed)').TextAreaResizer();
+	
+	// Tooltips
+	$('a.profileLink').tipsy({delayIn: 100, delayOut: 100, fade: true, trigger: 'hover', gravity: 'w', opacity: 0.9, title: 'href'});	
+	$('textarea').tipsy({delayIn: 100, delayOut: 1000, fade: true, trigger: 'hover', gravity: 'w', opacity: 0.9});	
+	$('input').tipsy({delayIn: 100, delayOut: 1000, fade: true, trigger: 'hover', gravity: 'w', opacity: 0.9});	
 });

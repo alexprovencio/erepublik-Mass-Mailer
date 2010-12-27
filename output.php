@@ -33,6 +33,7 @@ if ((strlen( $recipients ) == 0) && (strlen( $message ) == 0) && (strlen( $subje
 					<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 					<title>eRepublik Mass Mailer Output.php Documentation</title>
 					<link rel="stylesheet" type="text/css" href="style.css" />
+					<link rel="stylesheet" href="webfonts/stylesheet.css" type="text/css" charset="utf-8" />
 				</head>
 				
 				<body>

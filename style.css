@@ -1,6 +1,7 @@
+
 body
 {
-	font-family: "Segoe UI", Helvetica, sans-serif;
+	font-family: Segoe UI, 'SegoeUINormal', sans-serif;
 	font-size: 100%;
 	line-height: 1.5em;
 	margin-left: 80px;
@@ -10,12 +11,14 @@ body
 h1
 {
 	font-size: 1.5em;
+	font-family: Aller, 'Aller', sans-serif;
 	text-align: center;
 }
 
 h2
 {
 	font-size: 1.25em;
+	font-family: Aller, 'Aller', sans-serif;
 	line-height: 0.5em;
 	text-align: center;
 }
@@ -23,6 +26,7 @@ h2
 h3
 {
 	font-size: 1em;
+	font-family: Aller, 'Aller', sans-serif;
 	font-weight: 600;
 	line-height: 0.7em;
 	text-align: center;
