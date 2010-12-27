@@ -73,7 +73,7 @@ if ((strlen( $recipients ) == 0) && (strlen( $message ) == 0) && (strlen( $subje
 					
 					<p id="footer">Bugs?  Feature requests?  Design suggestions?  Comments?  Please talk to <a href="http://www.erepublik.com/en/citizen/profile/1242030">lietk12</a>!<br />
 					This project is being developed at <a href="https://github.com/lietk12/erepublik-Mass-Mailer">github</a>&mdash;contact lietk12 if you want to contribute.<br />
-					You can go to the web frontend for me <a href=./">here</a>.</p>
+					You can go to the web frontend for this page <a href=./>here</a>.</p>
 					
 					<script type="text/javascript">
 					var clicky = { log: function(){ return; }, goal: function(){ return; }};
