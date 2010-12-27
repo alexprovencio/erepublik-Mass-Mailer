@@ -3,14 +3,8 @@ body
 	font-family: "Segoe UI", Helvetica, sans-serif;
 	font-size: 100%;
 	line-height: 1.5em;
-	/* fallback (Opera) */
-	background: #FFFFFF;
-	/* Mozilla: */
-	background: -moz-linear-gradient(top, white, white 50%, #D0D0D0);
-	/*Chrome, Safari:*/
-	background: -webkit-gradient(linear, left 50%, left bottom, from(#FFFFFF), to(#D0D0D0));
-	/* MSIE */
-	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#FFFFFF', EndColorStr='#F0F0F0', GradientType=0);
+	margin-left: 80px;
+	margin-right: 80px;
 }
 
 h1
@@ -34,7 +28,7 @@ h3
 	text-align: center;
 }
 
-p
+p.centered
 {
 	text-align: center;
 }
@@ -119,6 +113,7 @@ div.grippie
 #footer
 {
 	font-size: 0.8em;
+	text-align: center;
 }
 
 #container
@@ -127,9 +122,20 @@ div.grippie
 	border-bottom: 1px solid black;
 	border-left: 1px solid black;
 	display: table;
-	width: 975px;
+	min-width: 975px;
+	max-width: 1200px;
 	margin-left: auto;
 	margin-right: auto;
+	
+	/*Gradient background*/
+	/* fallback (Opera) */
+	background: #FFFFFF;
+	/* Mozilla: */
+	background: -moz-linear-gradient(top, white, white 80%, #D0D0D0);
+	/*Chrome, Safari:*/
+	background: -webkit-gradient(linear, left 80%, left bottom, from(#FFFFFF), to(#D0D0D0));
+	/* MSIE */
+	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#FFFFFF', EndColorStr='#F0F0F0', GradientType=0);
 }
 
 #containerrow

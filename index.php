@@ -12,10 +12,6 @@
 </head>
 
 <?php
-include 'assembler.php';
-include 'outputFormatters.php';
-include 'inputInterface.php';
-	
 	// Handle post/get input type conversion
 	$submit = $_GET['submit'];
 	$inputType = $_GET['input'];
@@ -48,55 +44,66 @@ include 'inputInterface.php';
 	} else {
 		$targetmode = stripslashes( $_GET["target"] );
 	}
-	if (isset($_POST["output"])) {
-		$outputmode = stripslashes( $_POST["output"] );
-	} else {
-		$outputmode = stripslashes( $_GET["output"] );
-	}
+	// Generate a params string for use by cURL and GET data.
+	$params = "recipients=" . urlencode( $recipients ) . "&subject=" . urlencode( $subject ) . "&message=" . urlencode( $message ) . "&target=" . urlencode( $targetmode );
 	
 	if (isset($submit)) {
-		if ((strlen( $recipients ) == 0) || (strlen( $message ) == 0) || (strlen( $subject ) == 0)) {
-			$output = "Your recipient list, subject, AND message ALL must have things in them!";
-		} else {
-			// Convert target mode to actual target values
-			switch ($targetmode) {
-				case "self":
-					$target = "" ;
-					break;
-				case "new":
-					$target = "_blank";
-					break;
-				case "one":
-					$target = "one";
-					break;
-			}
-			// Split recipients list into an array
-			$recipientIDs = idToIdNum( urlToId( explode( "\n", $recipients ) ) );
-			// Generate link array
-			$outputArray = generateHtmlHrefs( assemble( $recipientIDs, $subject, $message, $replacements ), $recipientIDs, $target );
-			// Split array for one element per html line
-			for ($i = 0; $i < count( $outputArray ); $i++) {
-				$output = $output . $outputArray[$i] . '<br />';
-			}
+		// Gets the directory of this page
+		$backwards = strrev($_SERVER['PHP_SELF']);	// Gets the path to this page, backwards
+		while ($char != '/') {
+			$char = substr($backwards, 0, 1);
+			$backwards = substr($backwards, 1);
 		}
+		$pageDir = "http://" . $_SERVER[SERVER_NAME] . strrev($backwards);
+		
+		// Send data to output.php and retrieve the results
+		$ch = curl_init();
+		$options = array(
+			CURLOPT_RETURNTRANSFER => true,     // return web page
+			CURLOPT_HEADER         => false,    // don't return headers
+			CURLOPT_FOLLOWLOCATION => true,     // follow redirects
+			CURLOPT_ENCODING       => "",       // handle all encodings
+			CURLOPT_USERAGENT      => $_SERVER['HTTP_USER_AGENT'], // who am i
+			CURLOPT_AUTOREFERER    => true,     // set referer on redirect
+			CURLOPT_CONNECTTIMEOUT => 120,      // timeout on connect
+			CURLOPT_TIMEOUT        => 120,      // timeout on response
+			CURLOPT_MAXREDIRS      => 10,       // stop after 10 redirects
+		);
+		curl_setopt_array( $ch, $options );
+		if ($inputType == "get") {
+			curl_setopt($ch, CURLOPT_URL, $pageDir . "/output.php?" . $params );
+		} else {
+			curl_setopt($ch, CURLOPT_URL, $pageDir . "/output.php");
+			curl_setopt( $ch, CURLOPT_POST, true );
+			curl_setopt( $ch, CURLOPT_POSTFIELDS, $params );
+		}	
+		$output = curl_exec( $ch );
+		$header = curl_getinfo( $ch );
+		if (curl_errno( $ch ) != 0 || $header["http_code"] != 200) {
+			echo "<h1>Sorry, but I couldn't generate the list of links!</h1>";
+			echo "<pre>";
+			print_r($header);
+			echo "</pre>";
+		}
+		curl_close( $ch );
 	}
 ?>
 
 <body>
 
-<h1>lietk12's eRepublik Mass Mailer (v0.5)</h1>
+<h1>lietk12's eRepublik Mass Mailer (v0.6)</h1>
 
 <?php
 	if ($inputType == "post") {
-		echo '<p>This mass mailer is a simpler version of <a href="http://erep.thepenry.net/mailer.php">AndraX2000\'s mass mailer</a>.';
+		echo '<p class="centered">This mass mailer is an alternative to <a href="http://erep.thepenry.net/mailer.php">AndraX2000\'s mass mailer</a>, which is currently missing in action.';
 		// If the url has string length of 8000 or more, don't offer this option
 		if (strlen( $recipients . $message . $subject . $replacements ) < 8000) {
-			echo '  For a version which allows you to bookmark specific recipients/subjects/messages, click <a href="./?input=get&amp;recipients=' . urlencode( $recipients ) . '&amp;subject=' . urlencode( $subject ) . '&amp;message=' . urlencode( $message ) . '">here</a>.</p>';
+			echo '  For a version which allows you to bookmark specific recipients/subjects/messages, click <a href="./?input=get&amp;' . $params . '">here</a>.</p>';
 		} else {
 			echo '</p>';
 		}
 	} else {
-		echo '<h2>(Bookmarkable Version)</h2><p>This mass mailer is a bookmarkable version of <a href="./index.php">lietk12\'s mass mailer</a>; for super-long lists of people or long messages, this version may behave strangely, in which case you should use <a href="./?input=post&amp;recipients=' . urlencode( $recipients ) . '&amp;subject=' . urlencode( $subject ) . '&amp;message=' . urlencode( $message ) . '">the other version</a> instead.</p>';
+		echo '<h2>(Bookmarkable Version)</h2><p class="centered">This mass mailer is a bookmarkable version of <a href="./index.php">lietk12\'s mass mailer</a>; for super-long lists of people or long messages, this version may behave strangely, in which case you should use <a href="./?input=post&amp' . $params . '">the other version</a> instead.</p>';
 	}
 ?>
 
@@ -127,32 +134,27 @@ include 'inputInterface.php';
 <textarea name="message" id="message" rows="10" cols="52" maxlength="2000" wrap="soft" required="required" placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip blahblahblah.  Unless you disabled javascript, this box will autoresize to fit your message.  Your message must be shorter than 2000 characters.">
 <?php echo $message; ?></textarea>
 <h2>Options</h2>
-The list of links should go
-<select name="output">
-	<option value="column" <?php if ($outputmode == "column") {echo 'selected="selected"';}?>>in a column to the left</option>
-	<option value="new" <?php if ($outputmode == "new") {echo 'selected="selected"';}?>>in a new tab</option>
-	<option value="self" <?php if ($outputmode == "self") {echo 'selected="selected"';}?>>in this tab as a new page</option>
-</select>
-<br />
 Links, when left-clicked, will 
 <select name="target">
-	<option value="self" <?php if ($targetmode == "self") {echo 'selected="selected"';}?>>open in this tab</option>
+	<option value="self" <?php if ($targetmode == "self") {echo 'selected="selected"';}?>>open in this tab/window</option>
 	<option value="new" <?php if ($targetmode == "new") {echo 'selected="selected"';}?>>open a new tab for each link</option>
 	<option value="one" <?php if ($targetmode == "one") {echo 'selected="selected"';}?>>all go into one new tab</option>
 </select>
 
-<input type="submit" id="submit" value="Generate" name="submit" />
+<input type="submit" id="submit" value="Put the links in column to the left" name="submit" />
+<input type="submit" id="submit" value="Put the links in a new tab/window" name="submit" formtarget="_blank" formaction="output.php"/>
 </div>
 
 <div id="right">
 <div id="help">
 	<h2>Notes</h2>
-	For the recipients list, as long as you have one player per line, you can use any combination of the following formats to specify the players:
+	<p>For the recipients list, as long as you have one player per line, you can use any combination of the following formats to specify the players:</p>
 	<ul>
 		<li>Player profile URLs (e.g. <code>http://www.erepublik.com/en/citizen/profile/<?php echo rand(2, 4225400);?></code> )</li>
 		<li>Player PM URLs (e.g. <code>http://www.erepublik.com/en/messages/compose/<?php echo rand(2, 4225400);?></code> )</li>
 		<li>Profile IDs in the form of a "#" with the number afterwards (e.g. <code>#<?php echo rand(2, 4225400);?></code> ).</li>
 	</ul>
+	<p>More detailed documentation can be found <a href="./output#formats">here</a>.</p>
 </div>
 <!--
 <div id="replacements">
