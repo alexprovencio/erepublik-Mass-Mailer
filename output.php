@@ -47,28 +47,55 @@ if ((strlen( $recipients ) == 0) && (strlen( $message ) == 0) && (strlen( $subje
 					<p>At the moment, there isn\'t very much to say about this. Your subject should be a string at most 50 chars long (that\'s eRepublik\'s limitation). Your message itself should be no more than 2000 chars long (again, eRepublik\'s limitation). Your recipient list should be a list of any combination of the following formats, with each recipient having one line of his/her/its own:</p>
 					<ul>
 						<li>Profile IDs, with a "#" prepended to each ID, like <code>#' . rand(2, 4225400) . '</code></li>
-						<li>Player URLs which end in the player\'s ID, like <code>http://www.erepublik.com/en/citizen/profile/' . rand(2, 4225400) . '</code>, <code>http://www.erepublik.com/en/messages/compose/' . rand(2, 4225400) . '</code>, <code>http://economy.erepublik.com/en/citizen/donate/' . rand(2, 4225400) . '</code>, <code>http://economy.erepublik.com/en/citizen/donate/list/' . rand(2, 4225400) . '</code>, etc.</li>
+						<li>Player names, like <code>Eugene Harlot</code></li>
+						<li>Player URLs which end in the player\'s ID, like <code>http://www.erepublik.com/en/citizen/profile/' . rand(2, 4225400) . '</code>, <code>http://www.erepublik.com/en/messages/compose/' . rand(2, 4225400) . '</code>, <code>http://economy.erepublik.com/en/citizen/donate/' . rand(2, 4225400) . '</code>, <code>http://economy.erepublik.com/en/citizen/donate/list/' . rand(2, 4225400) . '</code>, etc. If you have some other kind of URL with the ID following a <code>?</code>, <code>/</code>, or <code>=</code>, it should work, too. For those of you who know regexes, the pattern I use to detect URLs is <code>/^http.*[/?=]([0-9]+).*$/</code>.</li>
 					</ul>
-					<p>Thus is an example of a list of recipients that I can work with:</p>
+					<p>By the way, I also ignore leading or trailing whitespace and empty lines. Thusly is an example of a list of recipients that I can work with:</p>
 					<code style="display: block; white-space: pre-line;">';
-					$listSize = rand(5, 20);
+					$listSize = rand(5, 40);
 					for ($i = 0; $i < $listSize; $i++) {
 						$recipientType = rand(0, 100);
 						$recipient = rand(2, 4225400);
+						// Add leading whitespace
+						if (rand(0, 10) < 4) {
+							for ($j = 0; $j < rand(0, 100) % 20; $j++ ) {
+									$output .= "&nbsp;";
+							}
+						}
+						// Add user entry
 						if (0 <= $recipientType && $recipientType < 30) {
 							$output .= "#" . $recipient;
-						} else if (30 <= $recipientType && $recipientType< 60) {
+						} else if (30 <= $recipientType && $recipientType < 50) {
 							$output .= "http://www.erepublik.com/en/citizen/profile/" . $recipient;
-						} else if (60 <= $recipientType && $recipientType < 80) {
+						} else if (50 <= $recipientType && $recipientType < 60) {
+							$output .= "";
+						} else if (60 <= $recipientType && $recipientType < 70) {
+							$people = array("Scrabman", "Justinious Mcwalburgson III", "Uncle Sam", "PrincessMedyPi", "Moishe", "One Eye", "Benn Dover", "DesertFalcon", "Ananias", "Leroy Combs", "Emerick", "Eugene Harlot", "Joe DaSmoe", "Publius", "Tiacha", "Michael Lewis", "Kyle321n", "Pearlswine", "Alby", "Jewitt", "John Woodman", "HeadmistressTalia", "Istarlan", "NeilP99", "ghvandyk", "Claire Littleton", "ProggyPop", "John Jay", "greecelightning", "Nathan Woods", "William Shafer", "NoneSuch", "MoDog", "ClammyJim", "Nave Saikiliah", "shoepuck", "SamWystan", "Henry Baldwin", "Queball_Jenkins");
+							$output .= $people[array_rand($people)];
+						} else if (70 <= $recipientType && $recipientType < 80) {
 							$output .= "http://www.erepublik.com/en/messages/compose/" . $recipient;
 						} else if (80 <= $recipientType && $recipientType < 90) {
 							$output .= "http://economy.erepublik.com/en/citizen/donate/" . $recipient;
 						} else {
 							$output .= "http://economy.erepublik.com/en/citizen/donate/list/" . $recipient;
 						}
+						// Add trailing whitespace
+						if (rand(0, 10) < 4) {
+							for ($j = 0; $j < rand(0, 100) % 20; $j++ ) {
+									$output .= "&nbsp;";
+							}
+						}
 						$output .= "\n";
 					}
 	$output .=		'</code>
+					
+					<h2><a name="errors">Possible Errors in Output</a></h2>
+					<p>If the API is being stupid, or if you gave me an invalid name or forty, I will output one of several errors:</p>
+					<ul>
+						<li>If I couldn\'t find the player ID for a given player name, I will not generate a link for that person, and I will make a note of the problem in the list of links.</li>
+						<li>If the API looks like it\'s down, I will not generate a link for any player names, and I will tell you that the API is down.</li>
+						<li>If you gave me a name which doesn\'t have a player ID associated with it, but which looks like a player ID (e.g. <code>' . rand(2, 4225400). '</code>), I will assume that you meant to put in the player ID (i.e. the number with a <code>#</code> in front of it), and I will treat it as such and generate a link for that person. However, I will make a note of it, just so you know. While this theoretically allows you to put in a list of profile IDs without the <code>#</code> symbol, I would not recommend that, because some numbers (e.g. <code>1234</code>) <strong>do</strong> have players with those numbers as their names</li>
+					</ul>
 					<h2><a name="output">Using the Output</a></h2>
 					<p>There are a few things you can do with my output, which consists of a series of links with class "profileLink". The easiest thing to do is to send data with me as the form action, so that users just see a blank page with links. However, if you want better integration, you can either use iframes (but that\'s dumb), AJAX/javascript/whatever, or server-side scripting, such as using PHP\'s awesome cURL functionality to send GET/POST data to me and then embedding my output in whatever you\'re doing. If you want to do more complex/advanced stuff, you may want to <a href="https://github.com/lietk12/erepublik-Mass-Mailer/blob/master/output.php">find me on github</a> and use me as an example write your own script.</p>
 					
@@ -108,19 +135,38 @@ if ((strlen( $recipients ) == 0) && (strlen( $message ) == 0) && (strlen( $subje
 			$target = "one";
 			break;
 	}
-	// Split recipients list into an array
-	$recipientIDs = idToIdNum( urlToId( explode( "\n", $recipients ) ) );
-	$output = UrlArrayToHtml( generateHtmlHrefs( assemble( $recipientIDs, $subject, $message, $replacements ), $recipientIDs, $target ) );
+	// Split recipients list into an array, strip off trailing/leading whitespace, and process it
+	$recipientIDs = preg_split( "/[\r]?\n/", $recipients );
+	for ($i = 0; $i < count($recipientIDs); $i++) {
+		$recipientIDs[$i] = trim( $recipientIDs[$i] );
+	}
+	$originalRecipientList = $recipientIDs; // Copy the original recipient list before processing into a new array
+	$recipientIDs = urlToId( $recipientIDs );
+	list( $recipientIDs, $recipientIDNotes ) = playerNameToId( $recipientIDs );
+	$recipientIDs = idToIdNum( $recipientIDs );
+	$output = UrlArrayToHtml( generateHtmlHrefs( assemble( $recipientIDs, $subject, $message, $replacements ), $originalRecipientList, $recipientIDs, $recipientIDNotes, $target ) );
 }
 
 echo $output;
 
-function generateHtmlHrefs( $messageUrls, $profileIDs, $target ) {
+function generateHtmlHrefs( $messageUrls, $originalRecipients, $profileIDs, $profileIDNotes, $target ) {
 	for ($i = 0; $i < count( $messageUrls ); $i++) {
-		if ( !isset($target) ) {
-			$outputs[$i] = '<a href="' . $messageUrls[$i] . '" class="profileLink">' . $profileIDs[$i] . '</a>';
-		} else {
-			$outputs[$i] =  '<a href="' . $messageUrls[$i] . '" class="profileLink" target="' . $target . '">' . $profileIDs[$i] . '</a>';
+		if ($messageUrls[$i] != "") {
+			$outputs[$i] = '<a href="' . $messageUrls[$i] . '" class="profileLink" title="' . $originalRecipients[$i] . '"';
+			if (isset( $target )) {
+				$outputs[$i] .=  ' target="' . $target . '"';
+			}
+			$outputs[$i] .= '>';
+		}
+		$outputs[$i] .= $profileIDs[$i];
+		if ($profileIDNotes[$i] != "") {
+			if ($outputs[$i] != "") {
+				$outputs[$i] .= "; ";
+			}
+			$outputs[$i] .= $profileIDNotes[$i];
+		}
+		if ($messageUrls[$i] != "") {
+			$outputs[$i] .= '</a>';
 		}
 	}
 	

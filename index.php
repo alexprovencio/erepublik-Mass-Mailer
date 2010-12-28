@@ -94,7 +94,7 @@
 
 <body>
 
-<h1>lietk12's eRepublik Mass Mailer (v0.6)</h1>
+<h1>lietk12's eRepublik Mass Mailer (v0.6.1)</h1>
 
 <?php
 	if ($inputType == "post") {
@@ -106,7 +106,7 @@
 			echo '</p>';
 		}
 	} else {
-		echo '<h2>(Bookmarkable Version)</h2><p class="centered">This mass mailer is a bookmarkable version of <a href="./index.php">lietk12\'s mass mailer</a>; for super-long lists of people or long messages, this version may behave strangely, in which case you should use <a href="./?input=post&amp;' . $params . '">the other version</a> instead.</p>';
+		echo '<h2>(Bookmarkable Version)</h2><p class="centered">This mass mailer is a bookmarkable version of <a href="./">lietk12\'s mass mailer</a>; for super-long lists of people or long messages, this version may behave strangely, in which case you should use <a href="./?input=post&amp;' . $params . '">the other version</a> instead.</p>';
 	}
 ?>
 
@@ -154,11 +154,11 @@ Links, when left-clicked, will
 	<h2>Notes</h2>
 	<p>For the recipients list, as long as you have one player per line, you can use any combination of the following formats to specify the players:</p>
 	<ul>
-		<li>Player profile URLs (e.g. <code>http://www.erepublik.com/en/citizen/profile/<?php echo rand(2, 4225400);?></code> )</li>
-		<li>Player PM URLs (e.g. <code>http://www.erepublik.com/en/messages/compose/<?php echo rand(2, 4225400);?></code> )</li>
+		<li>Player profile URLs</li>
+		<li>Player names</li>
 		<li>Profile IDs in the form of a "#" with the number afterwards (e.g. <code>#<?php echo rand(2, 4225400);?></code> ).</li>
 	</ul>
-	<p>More detailed documentation can be found <a href="./output#formats">here</a>.</p>
+	<p>More detailed documentation with examples and with other less common but still acceptable inputs can be found <a href="./output#formats">here</a>.</p>
 </div>
 <!--
 <div id="replacements">
@@ -173,7 +173,8 @@ Blah.
 </div>
 
 <p id="footer">Bugs?  Feature requests?  Design suggestions?  Comments?  Please talk to <a href="http://www.erepublik.com/en/citizen/profile/1242030">lietk12</a>!<br />
-This project is being developed at <a href="https://github.com/lietk12/erepublik-Mass-Mailer">github</a>&mdash;contact lietk12 if you want to contribute.</p>
+This project is being developed at <a href="https://github.com/lietk12/erepublik-Mass-Mailer">github</a>&mdash;contact lietk12 if you want to contribute.<br />
+If you're curious about what the next version will have, you can see the often-broken development branch of this massmailer <a href="../mmdev/">here</a>.</p>
 
 
 <script type="text/javascript">

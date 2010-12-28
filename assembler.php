@@ -2,11 +2,17 @@
 
 function assemble( $profileIDs, $subject, $message, $replacements )
 {
-	// Walk through the profile IDs, and generate an array of data-less PM URLs, an array of message subjects, and an array of message bodies
+	// Walk through the profile IDs, and generate an array of data-less PM URLs, an array of message subjects, and an array of message bodies; don't generate anything for blank profile ID entries.
 	for ($i = 0; $i < count($profileIDs); $i++) {
-		$outputs[$i] = "http://www.erepublik.com/en/messages/compose/" . $profileIDs[$i];
-		$subjects[$i] = $subject;
-		$messages[$i] = $message;
+		if ($profileIDs[$i] != "") {
+			$outputs[$i] = "http://www.erepublik.com/en/messages/compose/" . $profileIDs[$i];
+			$subjects[$i] = $subject;
+			$messages[$i] = $message;
+		} else {
+			$outputs[$i] = "";
+			$subjects[$i] = "";
+			$messages[$i] = "";
+		}
 	}
 	
 	if (isset( $replacements )) {
@@ -24,15 +30,17 @@ function assemble( $profileIDs, $subject, $message, $replacements )
 		}
 	}
 	
-	// Encode each subject and message to make it valid
+	// Urlencode each subject and message to make it valid
 	for ($i = 0; $i < count($outputs); $i++) {
 		$subjects[$i] = urlencode( $subjects[$i] );
 		$messages[$i] = urlencode( $messages[$i] );
 	}
 	
-	// Assemble data-less URLs, subjects, and messages
+	// Assemble data-less URLs with subjects and messages, as long as the URLs exist
 	for ($i = 0; $i < count($profileIDs); $i++) {
-		$outputs[$i] = $outputs[$i] . "?message_subject=" . $subjects[$i] . "&message_body=" . $messages[$i];
+		if ($outputs[$i] != "") {
+			$outputs[$i] .= "?message_subject=" . $subjects[$i] . "&message_body=" . $messages[$i];
+		}
 	}
 	
 	return $outputs;
