@@ -98,7 +98,7 @@
 
 <?php
 	if ($inputType == "post") {
-		echo '<p class="centered">This mass mailer is an alternative to <a href="http://erep.thepenry.net/mailer.php" class="testing">AndraX2000\'s mass mailer</a>, which is currently missing in action.';
+		echo '<p class="centered">This mass mailer is a simpler alternative to <a href="http://erep.thepenry.net/mailer.php" class="testing">AndraX2000\'s mass mailer</a>.';
 		// If the url has string length of 8000 or more, don't offer this option
 		if (strlen( $recipients . $message . $subject . $replacements ) < 8000) {
 			echo '  For a version which allows you to bookmark specific recipients/subjects/messages, click <a href="./?input=get&amp;' . $params . '">here</a>.</p>';
@@ -134,7 +134,7 @@
 <input type="text" name="subject" id="subject" value="<?php echo $subject; ?>" size="54" maxlength="50" required="required" placeholder="This is, like, the subject, yo!" title="Your subject must be at most 50 characters long." />
 
 <h3>Message:</h3>
-<textarea name="message" id="message" rows="10" cols="52" maxlength="2000" wrap="soft" required="required" placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip blahblahblah." title="Unless you disabled javascript, this box will autoresize to fit your message.  Your message must be shorter than 2000 characters.">
+<textarea name="message" id="message" rows="10" cols="52" maxlength="2000" wrap="soft" required="required" placeholder="Given the existence as uttered forth in the public works of Puncher and Wattmann of a personal God quaquaquaqua with white beard quaquaquaqua outside time without extension who from the heights of divine apathia divine athambia divine aphasia loves us dearly with some exceptions for reasons unknown but" title="Unless you disabled javascript, this box will autoresize to fit your message.  Your message must be shorter than 2000 characters.">
 <?php echo $message; ?></textarea>
 
 <h2>Options</h2>
