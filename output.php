@@ -23,6 +23,17 @@ if (isset($_POST["target"])) {
 } else {
 	$targetmode = stripslashes( $_GET["target"] );
 }
+if (isset($_POST["fields"])) {
+	$fields = $_POST["fields"];
+} else {
+	$fields = $_GET["fields"];
+}
+for ($i = 0; $i < count( $fields ); $i++) {
+	$fields[$i] = preg_split( "/[\r]?\n/", $fields[$i] );
+	for ($j = 0; $j < count( $fields[$i] ); $j++) {
+		$fields[$i][$j] = stripslashes( $fields[$i][$j] );
+	}
+}
 
 if ((strlen( $recipients ) == 0) && (strlen( $message ) == 0) && (strlen( $subject ) == 0)) {
 	$output = '
@@ -144,7 +155,7 @@ if ((strlen( $recipients ) == 0) && (strlen( $message ) == 0) && (strlen( $subje
 	$recipientIDs = urlToId( $recipientIDs );
 	list( $recipientIDs, $recipientIDNotes ) = playerNameToId( $recipientIDs );
 	$recipientIDs = idToIdNum( $recipientIDs );
-	$output = UrlArrayToHtml( generateHtmlHrefs( assemble( $recipientIDs, $subject, $message, $replacements ), $originalRecipientList, $recipientIDs, $recipientIDNotes, $target ) );
+	$output = UrlArrayToHtml( generateHtmlHrefs( assemble( $recipientIDs, $subject, $message, $fields ), $originalRecipientList, $recipientIDs, $recipientIDNotes, $target ) );
 }
 
 echo $output;

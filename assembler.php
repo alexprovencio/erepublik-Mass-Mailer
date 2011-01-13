@@ -24,8 +24,8 @@ function assemble( $profileIDs, $subject, $message, $replacements )
 			}
 			// With the current replacement array, replace the field tag of the current replacement array with the corresponding string for each element of the output array
 			for ($i = 0; $i < count($outputs); $i++) {
-				$subjects[$i] = str_replace( "{{FIELD" . ($r + 1) . "}}", $replacements[$r][$i], $subjects[$i] );
-				$messages[$i] = str_replace( "{{FIELD" . ($r + 1) . "}}", $replacements[$r][$i], $messages[$i] );
+				$subjects[$i] = str_replace( "{{FIELD" . ($r) . "}}", $replacements[$r][$i], $subjects[$i] );
+				$messages[$i] = str_replace( "{{FIELD" . ($r) . "}}", $replacements[$r][$i], $messages[$i] );
 			}
 		}
 	}
