@@ -16,14 +16,14 @@
 
 <?php
 	// Handle post/get input type conversion
-	$submit = $_GET['submit'];
+	$submit = $_GET['generate'];
 	$inputType = $_GET['input'];
-	if (isset($submit) || $inputType == "get") {
+	if (isset($submit) || $inputType == "get" || isset($_GET['submitFields']) || isset($_POST['submitFields']) ) {
 		$inputType = "get";
-		$submit = $_GET['submit'];
+		$submit = $_GET['generate'];
 	} else {
 		$inputType = "post";
-		$submit = $_POST['submit'];
+		$submit = $_POST['generate'];
 	}
 	
 	// Get data; post data always takes precedence
@@ -47,8 +47,30 @@
 	} else {
 		$targetmode = stripslashes( $_GET["target"] );
 	}
+	if (isset($_POST["fieldcount"])) {
+		$fieldcount = stripslashes( $_POST["fieldcount"] );
+	} else {
+		$fieldcount = stripslashes( $_GET["fieldcount"] );
+	}
+	if (isset($_POST["fields"])) {
+		$fields = $_POST["fields"];
+	} else {
+		$fields = $_GET["fields"];
+	}
+	for ($i = 0; $i < count( $fields ); $i++) {
+		$fields[$i] = stripslashes( $fields[$i] );
+	}
+	if (!isset( $fieldcount ) && count( $fields ) > 0) {
+		$fieldcount = count( $fields );
+	} else {
+		$fieldcount += 0;
+	}
+	
 	// Generate a params string for use by cURL and GET data.
-	$params = "recipients=" . urlencode( $recipients ) . "&subject=" . urlencode( $subject ) . "&message=" . urlencode( $message ) . "&target=" . urlencode( $targetmode );
+	$params = "recipients=" . urlencode( $recipients ) . "&subject=" . urlencode( $subject ) . "&message=" . urlencode( $message ) . "&target=" . urlencode( $targetmode ) . "&fieldcount=" . urlencode( $fieldcount );
+	for ($i = 0; $i < $fieldcount; $i++) {
+		$params .= "&fields[$i]=" . urlencode( $fields[$i] );
+	}
 	
 	if (isset($submit)) {
 		// Gets the directory of this page
@@ -127,14 +149,14 @@
 <div id="middle">
 <h2>Message Data</h2>
 <h3>Recipients:</h3>
-<textarea name="recipients" id="recipients" class="resizable" rows="10" cols="52" required="required" wrap="off" title="Remember, one URL/ID number per line!  By the way, unless you disabled javascript, you can grab the gray bar at the bottom of this box to resize it.">
+<textarea name="recipients" id="recipients" class="resizable" rows="10" cols="52" wrap="off" title="Remember, one URL/ID number per line!  By the way, unless you disabled javascript, you can grab the gray bar at the bottom of this box to resize it.">
 <?php echo $recipients; ?></textarea>
 
 <h3>Subject:</h3>
-<input type="text" name="subject" id="subject" value="<?php echo $subject; ?>" size="54" maxlength="50" required="required" placeholder="This is, like, the subject, yo!" title="Your subject must be at most 50 characters long." />
+<input type="text" name="subject" id="subject" value="<?php echo $subject; ?>" size="54" maxlength="50" placeholder="This is, like, the subject, yo!" title="Your subject must be at most 50 characters long." />
 
 <h3>Message:</h3>
-<textarea name="message" id="message" rows="10" cols="52" maxlength="2000" wrap="soft" required="required" placeholder="Given the existence as uttered forth in the public works of Puncher and Wattmann of a personal God quaquaquaqua with white beard quaquaquaqua outside time without extension who from the heights of divine apathia divine athambia divine aphasia loves us dearly with some exceptions for reasons unknown but" title="Unless you disabled javascript, this box will autoresize to fit your message.  Your message must be shorter than 2000 characters.">
+<textarea name="message" id="message" rows="10" cols="52" maxlength="2000" wrap="soft" placeholder="Given the existence as uttered forth in the public works of Puncher and Wattmann of a personal God quaquaquaqua with white beard quaquaquaqua outside time without extension who from the heights of divine apathia divine athambia divine aphasia loves us dearly with some exceptions for reasons unknown but" title="Unless you disabled javascript, this box will autoresize to fit your message.  Your message must be shorter than 2000 characters.">
 <?php echo $message; ?></textarea>
 
 <h2>Options</h2>
@@ -145,8 +167,9 @@ Links, when left-clicked, will
 	<option value="one" <?php if ($targetmode == "one") {echo 'selected="selected"';}?>>all go into one new tab</option>
 </select>
 
-<input type="submit" id="submit" value="Put the links in column to the left" name="submit" />
-<input type="submit" id="submit" value="Put the links in a new tab/window" name="submit" formtarget="_blank" formaction="output.php"/>
+<h2>Generate Link List</h2>
+<input type="submit" class="submit" value="Put the links in column to the left" name="generate" />
+<input type="submit" class="submit" value="Put the links in a new tab/window" name="generate" formtarget="_blank" formaction="output.php"/>
 </div>
 
 <div id="right">
@@ -160,11 +183,21 @@ Links, when left-clicked, will
 	</ul>
 	<p>More detailed documentation with examples and with other less common but still acceptable inputs can be found <a href="./output#formats">here</a>.</p>
 </div>
-<!--
+
 <div id="replacements">
-<h2>Replacement Data</h2>
-Blah.
-</div>-->
+<h2>Replacement Fields</h2>
+Number of fields: <input type="number" name = "fieldcount" id="fieldcount" min="0" max="64" value="<?php echo $fieldcount; ?>" size="2" maxlength="2" />
+<?php
+for ($i = 0; $i < $fieldcount; $i++) {
+	echo "<p>Field replacement data for <code>{{FIELD" . $i . "}}</code>:";
+	echo '<textarea name="fields[' . $i . ']" id="field" class="resizable" rows="10" cols="60" wrap="off" title="blah">';
+	echo $fields[$i];
+	echo "</textarea></p>";
+}
+?>
+<input type="submit" class="submit" value="Update the field data boxes" name="submitFields" />
+
+</div>
 </div>
 
 </form>

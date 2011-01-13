@@ -26,15 +26,15 @@ function playerNameToId( $recipientList )
 					$recipientListNotes[$i] .= "";
 				} else { // If we couldn't find the person but the API is still up
 					if (preg_match( '/^[0-9]+$/', $recipientList[$i] )) { // If the name looks like an ID, assume the user meant it as such, but give a warning.
-						$recipientListNotes[$i] = "Profile ID for the player named \"" . $recipientList[$i] . "\" could not be found, so I treated it like a profile ID number.";
+						$recipientListNotes[$i] = "I couldn't find a player named \"" . $recipientList[$i] . "\", so I treated the name like a profile ID number.";
 						$recipientList[$i] = "#" . $recipientList[$i];
 					} else { // Standard error message
-						$recipientListNotes[$i] = "Profile ID for the player named \"" . $recipientList[$i] . "\" could not be found.";
+						$recipientListNotes[$i] = "I couldn't find a player named \"" . $recipientList[$i] . "\".";
 						$recipientList[$i] = "";
 					}
 				}
 			} else { // API is down
-				$recipientListNotes[$i] = "Profile ID for the player named " . $recipientList[$i] . " could not be found because the API is down.";
+				$recipientListNotes[$i] = "I didn't look for a player named \"" . $recipientList[$i] . "\" because the API is down.";
 				$recipientList[$i] = "";
 			}
 		} else {
