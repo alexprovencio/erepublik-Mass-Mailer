@@ -3,9 +3,10 @@ body
 {
 	font-family: Segoe UI, 'SegoeUINormal', sans-serif;
 	font-size: 100%;
-	line-height: 1.5em;
+	line-height: 1.5;
 	margin-left: 80px;
 	margin-right: 80px;
+	color: #302226;
 }
 
 h1#title
@@ -13,22 +14,27 @@ h1#title
 	font-size: 1.5em;
 	font-family: Aller, 'Aller', sans-serif;
 	text-align: center;
+	margin-top: 1em;
+	margin-bottom: 0.6em;
 }
 
 h2#subtitle
 {
 	font-size: 1.25em;
 	font-family: Aller, 'Aller', sans-serif;
-	line-height: 0.5em;
+	line-height: 0.5;
 	text-align: center;
+	margin-bottom: 1em;
 }
 
 h1
 {
 	font-size: 1.25em;
 	font-family: Aller, 'Aller', sans-serif;
-	line-height: 0.5em;
+	line-height: 0.5;
 	text-align: center;
+	margin-top: 1.2em;
+	margin-bottom: 0.4em;
 }
 
 h2
@@ -36,8 +42,25 @@ h2
 	font-size: 1em;
 	font-family: Aller, 'Aller', sans-serif;
 	font-weight: 600;
-	line-height: 0.7em;
+	line-height: 0.5;
 	text-align: center;
+	margin-top: 1em;
+	margin-bottom: 0.8em;
+}
+
+p
+{
+	line-height: 1.7;
+	margin-top: 0.8em;
+	margin-bottom: 0.5em;
+	font-size: 0.9em;
+}
+
+ul
+{
+	margin-left: 1em;
+	line-height: 1.7;
+	font-size: 0.9em;
 }
 
 p.centered
@@ -48,22 +71,26 @@ p.centered
 a:link
 {
 	font-weight: 600;
-	color: black;
-}
-
-a:hover
-{
-	color: #555555;
-}
-
-a:active
-{
-	letter-spacing: 0.1em;
+	color: #0000FF;
+	text-decoration: none;
 }
 
 a:visited
 {
-	color: #777777;
+	color: #0000AA;
+	text-decoration: none;
+}
+
+a:hover
+{
+	color: #0066FF;
+	text-decoration: none;
+}
+
+a:active
+{
+	color: #0099FF;
+	text-decoration: none;
 }
 
 code
@@ -124,7 +151,7 @@ div.grippie
 
 footer
 {
-	font-size: 0.8em;
+	font-size: 0.7em;
 	text-align: center;
 }
 
@@ -137,6 +164,8 @@ footer
 	width: 980px;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 1em;
+	margin-bottom: 1em;
 	
 	/*Gradient background*/
 	/* fallback (Opera) */
@@ -180,4 +209,9 @@ footer
 {
 	text-align: left;
 	border-right: 1px solid black;
+}
+
+.hide
+{
+	display: none;
 }

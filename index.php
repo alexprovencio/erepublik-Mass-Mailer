@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>eRepublik Mass Mailer</title>
+	<link rel="stylesheet" href="reset.css" />
 	<link rel="stylesheet" href="style.css" />
 	<link rel="stylesheet" href="./js/tipsy.css" />
 	<link rel="stylesheet" href="webfonts/stylesheet.css" />
@@ -12,6 +13,9 @@
 	<script type="text/javascript" src="./js/textarearesizer.js"></script>
 	<script type="text/javascript" src="./js/tipsy.js"></script>
 	<script type="text/javascript" src="./js/plugins.js"></script>
+	<script type="text/javascript" src="./js/cookie.js"></script>
+	<script type="text/javascript" src="./js/showhide.js"></script>
+	
 	<!--[if lt IE 9]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
@@ -167,12 +171,12 @@
 </section>
 <section>
 <h1>Options</h1>
-Links, when left-clicked, will 
+<p>Links, when left-clicked, will 
 <select name="target" >
 	<option value="self" <?php if ($targetmode == "self") {echo 'selected="selected"';}?>>open in this tab/window</option>
 	<option value="new" <?php if ($targetmode == "new") {echo 'selected="selected"';}?>>open a new tab for each link</option>
 	<option value="one" <?php if ($targetmode == "one") {echo 'selected="selected"';}?>>all go into one new tab</option>
-</select>
+</select></p>
 </section>
 <section>
 <h1>Generate Link List</h1>
@@ -188,14 +192,17 @@ Links, when left-clicked, will
 	<ul>
 		<li>Player profile URLs</li>
 		<li>Player names</li>
-		<li>Profile IDs in the form of a "#" with the number afterwards (e.g. <code>#<?php echo rand(2, 4225400);?></code> ).</li>
+		<li>Profile IDs in the form of a number prefixed by a <code>#</code> symbol<br />
+		    (e.g. <code>#<?php echo rand(2, 4225400);?></code> ).</li>
 	</ul>
 	<p>More detailed documentation with examples and with other less common but still acceptable inputs can be found <a href="./output#formats">here</a>.</p>
 </section>
 
 <section id="replacements">
-<h1>Replacement Fields</h1>
-Number of fields: <input type="number" name = "fieldcount" id="fieldcount" min="0" max="64" value="<?php echo $fieldcount; ?>" size="2" maxlength="2" title="A number between 0 and 64, inclusive. Press the &quot;Update the field data boxes&quot; button at the bottom of this column to synchronize the number of visible boxes with the number of boxes specified in this field." />
+<h1>Replacement Fields<!--<span id="showhide" style="display: none;">--> (<a href="#" class="toggle" title="fieldData">Hide</a>)<!--</span>--></h1>
+<p>This is an advanced feature that you can safely disregard. If you're interested in how to use it, look <a href="./output#fields">here</a>.</p>
+<div id="fieldData">
+<p>Number of fields: <input type="number" name = "fieldcount" id="fieldcount" min="0" max="64" value="<?php echo $fieldcount; ?>" size="2" maxlength="2" title="A number between 0 and 64, inclusive. Press the &quot;Update the field data boxes&quot; button at the bottom of this column to synchronize the number of visible boxes with the number of boxes specified in this field." /></p>
 <?php
 for ($i = 0; $i < $fieldcount; $i++) {
 	echo "<p>Field replacement data for <code>{{FIELD" . $i . "}}</code>:";
@@ -205,7 +212,7 @@ for ($i = 0; $i < $fieldcount; $i++) {
 }
 ?>
 <input type="submit" class="submit" value="Update the field data boxes" name="submitFields" />
-
+</div>
 </section>
 </div>
 
@@ -220,6 +227,7 @@ This project is being developed at <a href="https://github.com/lietk12/erepublik
 If you're curious about what the next version will have, you can see the often-broken development branch of this massmailer <a href="../mmdev/">here</a>.</p>
 </footer>
 
+<script type="text/javascript">document.getElementById('showhide').style.display = 'inline';</script>
 
 <script type="text/javascript">
 var clicky = { log: function(){ return; }, goal: function(){ return; }};

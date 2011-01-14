@@ -41,15 +41,18 @@ if ((strlen( $recipients ) == 0) && (strlen( $message ) == 0) && (strlen( $subje
 				<html>
 				
 				<head>
-					<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+					<meta charset="UTF-8">
 					<title>eRepublik Mass Mailer Output.php Documentation</title>
+					<link rel="stylesheet" type="text/css" href="reset.css" />
 					<link rel="stylesheet" type="text/css" href="style.css" />
 					<link rel="stylesheet" href="webfonts/stylesheet.css" type="text/css" charset="utf-8" />
 				</head>
 				
 				<body>
+					<header>
 					<h1>Output.php Documentation</h1>
 					<p>Hi, you probably found me out of curiosity or malformed code or something. In any case, you might be interested in how I work (I am the component of lietk12\'s project who processes web inputs to prepare them for assembly into a list of links).</p>
+					</header>
 					<h2><a name="inputting">Inputting Data</a></h2>
 					<p>I parse POST and GET data sent to me, with POST data taking precedence. If you have a form and you want to send data to Output.php, your form\'s action attribute (or your html5 submit button\'s formaction attribute) should be "http://' . $_SERVER[SERVER_NAME] . $_SERVER["PHP_SELF"] . '". If you\'re using cURL with PHP, set CURLOPT_URL to "http://' . $_SERVER[SERVER_NAME] . $_SERVER["PHP_SELF"] . '" (along with necessary parameters (see below) if you plan to send me variables using GET).</p>
 					<p>POST/GET Variables that I require are "recipients", "subject", and ""message". These should be self-explanatory. If you fail to provide me with one or two of those variables, I will return an error message: "Your recipient list, subject, AND message ALL must have things in them!". If you leave all those variables blank, I will return this page, (the one which you are reading right now).</p>
@@ -100,6 +103,8 @@ if ((strlen( $recipients ) == 0) && (strlen( $message ) == 0) && (strlen( $subje
 					}
 	$output .=		'</code>
 					
+					<h2><a name="fields">Replacement Fields</a></h2>
+					<p>I can do some very flexible things with making individualized message bodies/message subjects. The easiest way to figure this out is to look at an example of its usage. Before you read on, make sure you try out <a href="http://null.cluenet.org/~lietk12/mmdev/?recipients=%23772321%0D%0A%231983919%0D%0A%235119%0D%0A%23133211%0D%0A%231224939%0D%0A%232290537&subject=Graduation+Exam+Information%3A+{{FIELD4}}&message=Hi%2C+{{FIELD0}}%2C%0D%0A%0D%0AYour+score+on+the+graduation+exam+is+{{FIELD1}}.+Thus%2C+{{FIELD2}}.+You+will+be+contacted+by+{{FIELD3}}.%0D%0A%0D%0ARegards%2C%0D%0ANobody&target=self&generate=Put+the+links+in+column+to+the+left&fieldcount=5&fields[0]=Eugene+Harlot%0D%0AAndyC%0D%0A%0D%0AUncle+Sam%0D%0AJewitt%0D%0AKentel&fields[1]=100%25%0D%0A60%25%0D%0A40%25%0D%0A0%25%0D%0A100%25%0D%0A100%25&fields[2]=you+have+passed+the+course+with+honors%0D%0Ayou+have+passed+the+course%0D%0Ayou+have+passed+the+course%0D%0Ayou+must+retake+the+course%0D%0Ayou+have+passed+the+course%0D%0Ayou+have+passed+the+course&fields[3]=Commander+Shepard%0D%0ACaptain+Mal%0D%0ACaptain+Mal%0D%0Ayour+teacher%0D%0ACaptain+Anderson%0D%0ACaptain+Mal&fields[4]=Congratulations!%0D%0AGood+Work!%0D%0AYou+Passed.%0D%0AYou+Suck.%0D%0ACongratulations!%0D%0ACongratulations!">this example</a>. Okay. Because this is a simple concept that is hard to explain, that\'s all the documentation I\'m giving for now.</p>
 					<h2><a name="errors">Possible Errors in Output</a></h2>
 					<p>If the API is being stupid, or if you gave me an invalid name or forty, I will output one of several errors:</p>
 					<ul>
@@ -110,9 +115,9 @@ if ((strlen( $recipients ) == 0) && (strlen( $message ) == 0) && (strlen( $subje
 					<h2><a name="output">Using the Output</a></h2>
 					<p>There are a few things you can do with my output, which consists of a series of links with class "profileLink". The easiest thing to do is to send data with me as the form action, so that users just see a blank page with links. However, if you want better integration, you can either use iframes (but that\'s dumb), AJAX/javascript/whatever, or server-side scripting, such as using PHP\'s awesome cURL functionality to send GET/POST data to me and then embedding my output in whatever you\'re doing. If you want to do more complex/advanced stuff, you may want to <a href="https://github.com/lietk12/erepublik-Mass-Mailer/blob/master/output.php">find me on github</a> and use me as an example write your own script.</p>
 					
-					<p id="footer">Bugs?  Feature requests?  Design suggestions?  Comments?  Please talk to <a href="http://www.erepublik.com/en/citizen/profile/1242030">lietk12</a>!<br />
+					<footer><p>Bugs?  Feature requests?  Design suggestions?  Comments?  Please talk to <a href="http://www.erepublik.com/en/citizen/profile/1242030">lietk12</a>!<br />
 					This project is being developed at <a href="https://github.com/lietk12/erepublik-Mass-Mailer">github</a>&mdash;contact lietk12 if you want to contribute.<br />
-					You can go to the web frontend for this page <a href=./>here</a>.</p>
+					You can go to the web frontend for this page <a href=./>here</a>.</p></footer>
 					
 					<script type="text/javascript">
 					var clicky = { log: function(){ return; }, goal: function(){ return; }};
