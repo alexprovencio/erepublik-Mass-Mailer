@@ -2,16 +2,19 @@
 <html>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
 	<title>eRepublik Mass Mailer</title>
-	<link rel="stylesheet" type="text/css" href="style.css" />
-	<link rel="stylesheet" type="text/css" href="./js/tipsy.css" />
-	<link rel="stylesheet" href="webfonts/stylesheet.css" type="text/css" charset="utf-8" />
+	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="./js/tipsy.css" />
+	<link rel="stylesheet" href="webfonts/stylesheet.css" />
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.js"></script>
 	<script type="text/javascript" src="./js/autoresize.js"></script>
 	<script type="text/javascript" src="./js/textarearesizer.js"></script>
 	<script type="text/javascript" src="./js/tipsy.js"></script>
 	<script type="text/javascript" src="./js/plugins.js"></script>
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 </head>
 
 <?php
@@ -115,8 +118,9 @@
 ?>
 
 <body>
-
-<h1>lietk12's eRepublik Mass Mailer (v0.6.1)</h1>
+<header>
+<?php if ($inputType != "post") {echo '<hgroup>';} ?>
+<h1 id="title">lietk12's eRepublik Mass Mailer (v0.6.1)</h1>
 
 <?php
 	if ($inputType == "post") {
@@ -128,9 +132,10 @@
 			echo '</p>';
 		}
 	} else {
-		echo '<h2>(Bookmarkable Version)</h2><p class="centered">This mass mailer is a bookmarkable version of <a href="./">lietk12\'s mass mailer</a>; for super-long lists of people or long messages, this version may behave strangely, in which case you should use <a href="./?input=post&amp;' . $params . '">the other version</a> instead.</p>';
+		echo '<h2 id="subtitle">(Bookmarkable Version)</h2></hgroup><p class="centered">This mass mailer is a bookmarkable version of <a href="./">lietk12\'s mass mailer</a>; for super-long lists of people or long messages, this version may behave strangely, in which case you should use <a href="./?input=post&amp;' . str_replace( "&", "&amp;", $params ) . '">the other version</a> instead.</p>';
 	}
 ?>
+</header>
 
 <div id="container">
 <div id="containerrow">
@@ -147,34 +152,38 @@
 <form method="<?php echo $inputType;?>" id="hasInfo" action="./">
 
 <div id="middle">
-<h2>Message Data</h2>
-<h3>Recipients:</h3>
+<section>
+<h1>Message Data</h1>
+<h2>Recipients:</h2>
 <textarea name="recipients" id="recipients" class="resizable" rows="10" cols="52" wrap="off" title="Remember, one URL/ID number per line!  By the way, unless you disabled javascript, you can grab the gray bar at the bottom of this box to resize it.">
 <?php echo $recipients; ?></textarea>
 
-<h3>Subject:</h3>
+<h2>Subject:</h2>
 <input type="text" name="subject" id="subject" value="<?php echo $subject; ?>" size="54" maxlength="50" placeholder="This is, like, the subject, yo!" title="Your subject must be at most 50 characters long." />
 
-<h3>Message:</h3>
+<h2>Message:</h2>
 <textarea name="message" id="message" rows="10" cols="52" maxlength="2000" wrap="soft" placeholder="Given the existence as uttered forth in the public works of Puncher and Wattmann of a personal God quaquaquaqua with white beard quaquaquaqua outside time without extension who from the heights of divine apathia divine athambia divine aphasia loves us dearly with some exceptions for reasons unknown but" title="Unless you disabled javascript, this box will autoresize to fit your message.  Your message must be shorter than 2000 characters.">
 <?php echo $message; ?></textarea>
-
-<h2>Options</h2>
+</section>
+<section>
+<h1>Options</h1>
 Links, when left-clicked, will 
 <select name="target" >
 	<option value="self" <?php if ($targetmode == "self") {echo 'selected="selected"';}?>>open in this tab/window</option>
 	<option value="new" <?php if ($targetmode == "new") {echo 'selected="selected"';}?>>open a new tab for each link</option>
 	<option value="one" <?php if ($targetmode == "one") {echo 'selected="selected"';}?>>all go into one new tab</option>
 </select>
-
-<h2>Generate Link List</h2>
+</section>
+<section>
+<h1>Generate Link List</h1>
 <input type="submit" class="submit" value="Put the links in column to the left" name="generate" />
 <input type="submit" class="submit" value="Put the links in a new tab/window" name="generate" formtarget="_blank" formaction="output.php"/>
+</section>
 </div>
 
 <div id="right">
-<div id="help">
-	<h2>Notes</h2>
+<section id="help">
+	<h1>Notes</h1>
 	<p>For the recipients list, as long as you have one player per line, you can use any combination of the following formats to specify the players:</p>
 	<ul>
 		<li>Player profile URLs</li>
@@ -182,22 +191,22 @@ Links, when left-clicked, will
 		<li>Profile IDs in the form of a "#" with the number afterwards (e.g. <code>#<?php echo rand(2, 4225400);?></code> ).</li>
 	</ul>
 	<p>More detailed documentation with examples and with other less common but still acceptable inputs can be found <a href="./output#formats">here</a>.</p>
-</div>
+</section>
 
-<div id="replacements">
-<h2>Replacement Fields</h2>
-Number of fields: <input type="number" name = "fieldcount" id="fieldcount" min="0" max="64" value="<?php echo $fieldcount; ?>" size="2" maxlength="2" />
+<section id="replacements">
+<h1>Replacement Fields</h1>
+Number of fields: <input type="number" name = "fieldcount" id="fieldcount" min="0" max="64" value="<?php echo $fieldcount; ?>" size="2" maxlength="2" title="A number between 0 and 64, inclusive. Press the &quot;Update the field data boxes&quot; button at the bottom of this column to synchronize the number of visible boxes with the number of boxes specified in this field." />
 <?php
 for ($i = 0; $i < $fieldcount; $i++) {
 	echo "<p>Field replacement data for <code>{{FIELD" . $i . "}}</code>:";
-	echo '<textarea name="fields[' . $i . ']" id="field" class="resizable" rows="10" cols="60" wrap="off" title="blah">';
+	echo '<textarea name="fields[' . $i . ']" id="field" class="resizable" rows="10" cols="60" wrap="off">';
 	echo $fields[$i];
 	echo "</textarea></p>";
 }
 ?>
 <input type="submit" class="submit" value="Update the field data boxes" name="submitFields" />
 
-</div>
+</section>
 </div>
 
 </form>
@@ -205,9 +214,11 @@ for ($i = 0; $i < $fieldcount; $i++) {
 </div>
 </div>
 
-<p id="footer">Bugs?  Feature requests?  Design suggestions?  Comments?  Please talk to <a href="http://www.erepublik.com/en/citizen/profile/1242030">lietk12</a>!<br />
+<footer>
+<p>Bugs?  Feature requests?  Design suggestions?  Comments?  Please talk to <a href="http://www.erepublik.com/en/citizen/profile/1242030">lietk12</a>!<br />
 This project is being developed at <a href="https://github.com/lietk12/erepublik-Mass-Mailer">github</a>&mdash;contact lietk12 if you want to contribute.<br />
 If you're curious about what the next version will have, you can see the often-broken development branch of this massmailer <a href="../mmdev/">here</a>.</p>
+</footer>
 
 
 <script type="text/javascript">
