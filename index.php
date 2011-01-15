@@ -12,9 +12,10 @@
 	<script type="text/javascript" src="./js/autoresize.js"></script>
 	<script type="text/javascript" src="./js/textarearesizer.js"></script>
 	<script type="text/javascript" src="./js/tipsy.js"></script>
-	<script type="text/javascript" src="./js/plugins.js"></script>
 	<script type="text/javascript" src="./js/cookie.js"></script>
 	<script type="text/javascript" src="./js/showhide.js"></script>
+	
+	<script type="text/javascript" src="./js/plugins.js"></script>
 	
 	<!--[if lt IE 9]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -124,13 +125,13 @@
 <body>
 <header>
 <?php if ($inputType != "post") {echo '<hgroup>';} ?>
-<h1 id="title">lietk12's eRepublik Mass Mailer (v0.6.1)</h1>
+<h1 id="title">lietk12's eRepublik Mass Mailer (v0.7)</h1>
 
 <?php
 	if ($inputType == "post") {
 		echo '<p class="centered">This mass mailer is a simpler alternative to <a href="http://erep.thepenry.net/mailer.php" class="testing">AndraX2000\'s mass mailer</a>.';
 		// If the url has string length of 8000 or more, don't offer this option
-		if (strlen( $recipients . $message . $subject . $replacements ) < 8000) {
+		if (strlen( $params ) < 8000) {
 			echo '  For a version which allows you to bookmark specific recipients/subjects/messages, click <a href="./?input=get&amp;' . $params . '">here</a>.</p>';
 		} else {
 			echo '</p>';
