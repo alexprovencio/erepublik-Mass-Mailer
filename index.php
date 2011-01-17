@@ -20,6 +20,10 @@
 	<!--[if lt IE 9]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+	
+	<?php
+		include 'links.php';
+	?>
 </head>
 
 <?php
@@ -124,12 +128,12 @@
 
 <body>
 <header>
-<?php if ($inputType != "post") {echo '<hgroup>';} ?>
-<h1 id="title">lietk12's eRepublik Mass Mailer (v0.7)</h1>
+<h1 id="title">lietk12's <?php if ($inputType != "post") {echo "Bookmarkable ";} ?>Mass Mailer (v0.7.1)</h1>
+<p id="tools"><?php if ($inputType == "post") {links( "mm" );} else {links( "bmm" );} ?></p>
 
 <?php
 	if ($inputType == "post") {
-		echo '<p class="centered">This mass mailer is a simpler alternative to <a href="http://erep.thepenry.net/mailer.php" class="testing">AndraX2000\'s mass mailer</a>.';
+		echo '<p id="description">This mass mailer is a stand-alone alternative to <a href="http://erep.thepenry.net/mailer.php" class="testing">AndraX2000\'s mass mailer</a>.';
 		// If the url has string length of 8000 or more, don't offer this option
 		if (strlen( $params ) < 8000) {
 			echo '  For a version which allows you to bookmark specific recipients/subjects/messages, click <a href="./?input=get&amp;' . $params . '">here</a>.</p>';
@@ -137,7 +141,7 @@
 			echo '</p>';
 		}
 	} else {
-		echo '<h2 id="subtitle">(Bookmarkable Version)</h2></hgroup><p class="centered">This mass mailer is a bookmarkable version of <a href="./">lietk12\'s mass mailer</a>; for super-long lists of people or long messages, this version may behave strangely, in which case you should use <a href="./?input=post&amp;' . str_replace( "&", "&amp;", $params ) . '">the other version</a> instead.</p>';
+		echo '<p id="description">This mass mailer is a bookmarkable version of <a href="./">lietk12\'s mass mailer</a>; for super-long lists of people or long messages, you should use <a href="./?input=post&amp;' . str_replace( "&", "&amp;", $params ) . '">the other version</a> instead to ensure stability.</p>';
 	}
 ?>
 </header>

@@ -14,6 +14,9 @@
 	<script type="text/javascript" src="./js/tipsy.js"></script>
 	<script type="text/javascript" src="./js/cookie.js"></script>
 	<script type="text/javascript" src="./js/showhide.js"></script>
+	<?php
+		include 'links.php';
+	?>
 	
 	<script type="text/javascript" src="./js/plugins.js"></script>
 	
@@ -61,7 +64,7 @@
 <body>
 <header>
 <h1 id="title">lietk12's Divide and Conquer</h1>
-
+<p id="tools"><?php links( "dac" )?></p>
 <p class="centered">This is a small tool that you can use to split a long list of recipients into smaller chunks of a more manageable size. It'll generate a list of links for <a href="./">lietk12's mass mailer</a>, with each chunk of recipients going into one link, that you can pass onto other people to delegate the mass-mailing process.</p>
 
 </header>

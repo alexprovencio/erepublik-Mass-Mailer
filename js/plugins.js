@@ -6,8 +6,9 @@ $(document).ready(function(){
 	$('textarea.resizable:not(.processed)').TextAreaResizer();
 	
 	// Tooltips
-	$('a.profileLink').tipsy({fade: true, trigger: 'hover', gravity: 'w', opacity: 0.9});	
-	$('textarea').tipsy({delayIn: 100, delayOut: 1000, fade: true, trigger: 'hover', gravity: 'w', opacity: 0.9});	
+	$('a.profileLink').tipsy({fade: true, trigger: 'hover', gravity: 'w', opacity: 0.9});
+	$('a.toolLink').tipsy({fade: true, trigger: 'hover', gravity: 'n', opacity: 0.9});
+	$('textarea').tipsy({delayIn: 100, delayOut: 1000, fade: true, trigger: 'hover', gravity: 'w', opacity: 0.9});
 	$('input').tipsy({delayIn: 100, delayOut: 1000, fade: true, trigger: 'hover', gravity: 'w', opacity: 0.9});
 	
 	// Show/hide toggle

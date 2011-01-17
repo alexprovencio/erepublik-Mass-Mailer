@@ -63,7 +63,7 @@ ul
 	font-size: 0.9em;
 }
 
-p.centered
+#description, #tools
 {
 	text-align: center;
 }
