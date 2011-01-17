@@ -18,7 +18,7 @@ function playerNameToId( $recipientList )
 {
 	$apiFunctionality = apiFunctionality();
 	for ($i = 0; $i < count($recipientList); $i++) {
-		if (preg_match( '/^[^#].+/', $recipientList[$i] )) { // Assume non-blank lines that don't start with "#" arenames.
+		if (preg_match( '/^[^#].+/', $recipientList[$i] )) { // Assume non-blank lines that don't start with "#" are names.
 			if ($apiFunctionality) {
 				$id = getInfo( rawurlencode( $recipientList[$i] ), "id" );
 				if ($id != false) { // Success

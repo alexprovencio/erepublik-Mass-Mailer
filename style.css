@@ -157,8 +157,6 @@ footer
 
 #container
 {
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
 	border-left: 1px solid black;
 	display: table;
 	width: 980px;
@@ -187,6 +185,8 @@ footer
 
 #left, #middle, #right
 {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
 	display: table-cell;
 	padding-left: 0.5em;
 	padding-right: 0.5em;
