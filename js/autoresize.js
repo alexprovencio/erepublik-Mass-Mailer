@@ -3,7 +3,7 @@
  * Requires jQuery
  */
 function scaleTextareas() {
-  jQuery('#message').each(function(i, t){
+  jQuery('.autoresize').each(function(i, t){
     var m = 0;
     $($(t).val().split("\n")).each(function(i, s){
       m += (s.length/(t.offsetWidth/10)) + 1;

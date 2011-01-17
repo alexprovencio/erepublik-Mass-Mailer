@@ -167,7 +167,7 @@
 <input type="text" name="subject" id="subject" value="<?php echo $subject; ?>" size="54" maxlength="50" placeholder="This is, like, the subject, yo!" title="Your subject must be at most 50 characters long." />
 
 <h2>Message:</h2>
-<textarea name="message" id="message" rows="10" cols="52" maxlength="2000" wrap="soft" placeholder="Given the existence as uttered forth in the public works of Puncher and Wattmann of a personal God quaquaquaqua with white beard quaquaquaqua outside time without extension who from the heights of divine apathia divine athambia divine aphasia loves us dearly with some exceptions for reasons unknown but" title="Unless you disabled javascript, this box will autoresize to fit your message.  Your message must be shorter than 2000 characters.">
+<textarea name="message" id="message" class="autoresize" rows="10" cols="52" maxlength="2000" wrap="soft" placeholder="Given the existence as uttered forth in the public works of Puncher and Wattmann of a personal God quaquaquaqua with white beard quaquaquaqua outside time without extension who from the heights of divine apathia divine athambia divine aphasia loves us dearly with some exceptions for reasons unknown but" title="Unless you disabled javascript, this box will autoresize to fit your message.  Your message must be shorter than 2000 characters.">
 <?php echo $message; ?></textarea>
 </section>
 <section>

@@ -30,16 +30,36 @@
 	$recipients = stripslashes( $_POST["recipients"] );
 	$chunksize = stripslashes( $_POST["chunksize"] );
 	
-	// Generate a params string for use by cURL and GET data.
-	$params = "recipients=" . urlencode( $recipients ) . "&subject=" . urlencode( $subject ) . "&message=" . urlencode( $message ) . "&target=" . urlencode( $targetmode ) . "&fieldcount=" . urlencode( $fieldcount );
-	for ($i = 0; $i < $fieldcount; $i++) {
-		$params .= "&fields[$i]=" . urlencode( $fields[$i] );
+	if (isset($submit)) {
+		$recipientIDs = preg_split( "/[\r]?\n/", $recipients );
+		for ($i = 0; $i < count($recipientIDs); $i++) {
+			$recipientIDs[$i] = trim( $recipientIDs[$i] );
+		}
+		
+		for ($i = 0; $i < count($recipientIDs); $i++) {
+			$chunk .= $recipientIDs[$i];
+			if ($i % $chunksize == 0) {
+				$texts[] = $i . "-";
+			}
+			if ($i % $chunksize == $chunksize - 1 || $i == count($recipientIDs) - 1) {
+				$chunks[] = $chunk;
+				$texts[-1 + count($texts)] .= $i;
+				$chunk = "";
+			} else {
+			$chunk .=  '%0D%0A';
+			}
+		}
+		
+		for ($i = 0; $i < count($chunks);  $i++) {
+			$chunks[$i] = './?recipients=' . $chunks[$i];
+			$chunks[$i] = '<a href="' . $chunks[$i] . '">' . $texts[$i] . '</a><br />';
+			$output .= $chunks[$i];
+		}
 	}
 ?>
 
 <body>
 <header>
-<?php if ($inputType != "post") {echo '<hgroup>';} ?>
 <h1 id="title">lietk12's Divide and Conquer</h1>
 
 <p class="centered">This is a small tool that you can use to split a long list of recipients into smaller chunks of a more manageable size. It'll generate a list of links for <a href="./">lietk12's mass mailer</a>, with each chunk of recipients going into one link, that you can pass onto other people to delegate the mass-mailing process.</p>
@@ -58,18 +78,18 @@
 	}
 ?>
 
-<form method="<?php echo $inputType;?>" id="hasInfo" action="./">
+<form method="post" id="hasInfo" action="./splitter">
 
 <div id="middle">
 <section>
 <h1>Message Data</h1>
 <h2>Recipients:</h2>
-<textarea name="recipients" id="recipients" class="resizable" rows="10" cols="52" wrap="off" title="Remember, one URL/ID number per line!  By the way, unless you disabled javascript, you can grab the gray bar at the bottom of this box to resize it.">
+<textarea name="recipients" id="recipients" class="resizable" rows="15" cols="52" wrap="off" required="required" title="Remember, one recipient per line!">
 <?php echo $recipients; ?></textarea>
 
 <h1>Chunk Size</h1>
 <p>The list of recipients should be split up into chunks of 
-<input type="number" name = "chunksize" id="chunksize" min="0" value="<?php echo $chunksize; ?>" size="4" title="" />
+<input type="number" name = "chunksize" id="chunksize" min="1" value="<?php echo $chunksize; ?>" size="4" title="" required="required" />
 people each, with each chunk used to generate a link populating a mass-mailer form.</p>
 </section>
 <section>
@@ -85,6 +105,8 @@ people each, with each chunk used to generate a link populating a mass-mailer fo
 
 <footer>
 <p>Bugs?  Feature requests?  Design suggestions?  Comments?  Please talk to <a href="http://www.erepublik.com/en/citizen/profile/1242030">lietk12</a>!<br />
+This project is being developed at <a href="https://github.com/lietk12/erepublik-Mass-Mailer">github</a>&mdash;contact lietk12 if you want to contribute.<br />
+If you're curious about what the next version will have, you can see the development branch of this tool <a href="../mmdev/splitter">here</a>.</p>
 </footer>
 
 <script type="text/javascript">document.getElementById('showhide').style.display = 'inline';</script>
