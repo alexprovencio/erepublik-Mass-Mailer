@@ -45,6 +45,32 @@ function playerNameToId( $recipientList )
 	return array( $recipientList, $recipientListNotes );
 }
 
+function playerIdToName( $recipientList )
+{
+	$apiFunctionality = apiFunctionality();
+	for ($i = 0; $i < count($recipientList); $i++) {
+		if (preg_match( '/^[#].+/', $recipientList[$i] )) { // Assume non-blank lines that start with "#" are IDs.
+			if ($apiFunctionality) {
+				$name = getInfo( $recipientList[$i], "name" );
+				if ($name != false) { // Success
+					$recipientList[$i] = $name;
+					$recipientListNotes[$i] .= "";
+				} else { // If we couldn't find the person but the API is still up
+					$recipientListNotes[$i] = "I couldn't find a player with ID \"" . $recipientList[$i] . "\".";
+					$recipientList[$i] = "";
+				}
+			} else { // API is down
+				$recipientListNotes[$i] = "I didn't look for a player with ID \"" . $recipientList[$i] . "\" because the API is down.";
+				$recipientList[$i] = "";
+			}
+		} else {
+			$recipientListNotes[$i] .= "";
+		}
+	}
+	
+	return array( $recipientList, $recipientListNotes );
+}
+
 // Converts IDs of the form "#1242030" to the form "1242030"
 function idToIdNum( $recipientList )
 {

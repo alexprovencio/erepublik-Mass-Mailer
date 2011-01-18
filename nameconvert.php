@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>eRepublik Recipient List Splitter</title>
+	<title>eRepublik Name/Profile ID Lookup</title>
 	<link rel="stylesheet" href="reset.css" />
 	<link rel="stylesheet" href="style.css" />
 	<link rel="stylesheet" href="./js/tipsy.css" />
@@ -16,6 +16,7 @@
 	<script type="text/javascript" src="./js/showhide.js"></script>
 	<?php
 		include 'links.php';
+		include 'inputInterface.php';
 	?>
 	
 	<script type="text/javascript" src="./js/plugins.js"></script>
@@ -27,45 +28,36 @@
 
 <?php
 	// Handle post/get input type conversion
-	$submit = $_POST['generate'];
+	$submit = $_POST['convert'];
 	
 	// Get data
 	$recipients = stripslashes( $_POST["recipients"] );
-	$chunksize = stripslashes( $_POST["chunksize"] );
+	$outputmode = stripslashes( $_POST["outputmode"] );
+	
+	// Split recipients list into an array, strip off trailing/leading whitespace, and process it
+	$recipientList = preg_split( "/[\r]?\n/", $recipients );
+	for ($i = 0; $i < count($recipientList); $i++) {
+		$recipientList[$i] = trim( $recipientList[$i] );
+	}
 	
 	if (isset($submit)) {
-		$recipientIDs = preg_split( "/[\r]?\n/", $recipients );
-		for ($i = 0; $i < count($recipientIDs); $i++) {
-			$recipientIDs[$i] = trim( $recipientIDs[$i] );
+		if ($outputmode == "id") {
+			list( $recipientList, $recipientNotes ) = playerNameToId( $recipientList );
+		} else {
+			list( $recipientList, $recipientNotes ) = playerIdToName( $recipientList );
 		}
 		
-		for ($i = 0; $i < count($recipientIDs); $i++) {
-			$chunk .= $recipientIDs[$i];
-			if ($i % $chunksize == 0) {
-				$texts[] = $i . "-";
-			}
-			if ($i % $chunksize == $chunksize - 1 || $i == count($recipientIDs) - 1) {
-				$chunks[] = $chunk;
-				$texts[-1 + count($texts)] .= $i;
-				$chunk = "";
-			} else {
-			$chunk .=  '%0D%0A';
-			}
-		}
-		
-		for ($i = 0; $i < count($chunks);  $i++) {
-			$chunks[$i] = './?recipients=' . $chunks[$i];
-			$chunks[$i] = '<a href="' . $chunks[$i] . '">' . $texts[$i] . '</a><br />';
-			$output .= $chunks[$i];
+		for ($i = 0; $i < count( $recipientList ); $i++) {
+			$output .= $recipientList[$i] . $recipientNotes[$i] . "<br />";
 		}
 	}
 ?>
 
 <body>
 <header>
-<h1 id="title">lietk12's Divide and Conquer</h1>
-<p id="tools"><?php links( "dac" )?></p>
-<p class="centered">This is a small tool that you can use to split a long list of recipients into smaller chunks of a more manageable size. It'll generate a list of links for <a href="./">lietk12's mass mailer</a>, with each chunk of recipients going into one link, that you can pass onto other people to delegate the mass-mailing process.</p>
+<h1 id="title">lietk12's Transmogrifier</h1>
+<p id="tools"><?php links( "t" )?></p>
+<p class="centered">This is a small tool that you can use to convert a list of player names into profile IDs, or vice versa. Converting player names to profile IDs is useful if you want to save this list for future use and want to be able to use it conveniently, even when the API is down or being suuuuuuuper-slow. You might want to convert profile IDs into player names if you want to get a list of names for use in replacement fields in lietk12's mass mailer.</p>
 
 </header>
 
@@ -75,28 +67,32 @@
 <?php		
 	if (isset($submit)) {
 		echo '<div id="left">';
-		echo '<h2>Links</h2>';
+		echo '<h2>Result</h2>';
 		echo $output;
 		echo '</div>';
 	}
 ?>
 
-<form method="post" id="hasInfo" action="./splitter">
+<form method="post" id="hasInfo" action="./nameconvert">
 
 <div id="middle">
 <section>
-<h1>Recipients</h1>
-<textarea name="recipients" id="recipients" class="resizable" rows="15" cols="52" wrap="off" required="required" title="Remember, one recipient per line!">
+<h1>Player Names/Profile IDs</h1>
+<textarea name="recipients" id="recipients" class="resizable" rows="15" cols="52" wrap="off" required="required" title="Remember, one recipient per line! Also, profile IDs should be of the form '#profileID', e.g. #1242030">
 <?php echo $recipients; ?></textarea>
 
-<h1>Chunk Size</h1>
-<p>The list of recipients should be split up into chunks of 
-<input type="number" name = "chunksize" id="chunksize" min="1" value="<?php echo $chunksize; ?>" size="4" title="" required="required" />
-people each, with each chunk used to generate a link populating a mass-mailer form.</p>
+<h1>Conversion Mode</h1>
+<p>Generate a list of 
+<select name="outputmode" >
+	<option value="name" <?php if ($outputmode != "id") {echo 'selected="selected"';}?>>player names</option>
+	<option value="id" <?php if ($outputmode == "id") {echo 'selected="selected"';}?>>profile IDs</option>
+</select>
+from the input.
+</p>
 </section>
 <section>
-<h1>Generate Link List</h1>
-<input type="submit" class="submit" value="Generate" name="generate" />
+<h1>Convert</h1>
+<input type="submit" class="submit" value="Convert" name="convert" />
 </section>
 </div>
 

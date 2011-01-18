@@ -1,5 +1,4 @@
 <?php
-
 function apiFunctionality() {
 	if (getFeed( "#772321" ) == false) {
 		return false;
