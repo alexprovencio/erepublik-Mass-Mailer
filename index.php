@@ -205,7 +205,7 @@
 
 <section id="replacements">
 <h1>Replacement Fields<!--<span id="showhide" style="display: none;">--> (<a href="#" class="toggle" title="fieldData">Hide</a>)<!--</span>--></h1>
-<p>This is an advanced feature that you can safely disregard; you can think of it as mail merge functionality. If you're interested in how to use it, look <a href="./output#fields">here</a>.</p>
+<p>This is an advanced feature that you can safely disregard; you can think of it as mail merge functionality. If you're interested in how to use it, you can <a href="http://www.screencast.com/users/lietk12/folders/Jing/media/5ec8916a-812c-4681-9fce-c9d92f38faa0" target="_blank">view a demonstration</a> involving a scenario of assigning blockers to 61 regions.</p>
 <div id="fieldData">
 <p>Number of fields: <input type="number" name = "fieldcount" id="fieldcount" min="0" max="64" value="<?php echo $fieldcount; ?>" size="2" maxlength="2" title="A number between 0 and 64, inclusive. Press the &quot;Update the field data boxes&quot; button at the bottom of this column to synchronize the number of visible boxes with the number of boxes specified in this field." /></p>
 <?php
