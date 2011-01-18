@@ -65,16 +65,15 @@
 <header>
 <h1 id="title">lietk12's Divide and Conquer</h1>
 <p id="tools"><?php links( "dac" )?></p>
-<p class="centered">This is a small tool that you can use to split a long list of recipients into smaller chunks of a more manageable size. It'll generate a list of links for <a href="./">lietk12's mass mailer</a>, with each chunk of recipients going into one link, that you can pass onto other people to delegate the mass-mailing process.</p>
+<p id="description">This is a small tool that you can use to split a long list of recipients into smaller chunks of a more manageable size. It'll generate a list of links for <a href="./">lietk12's mass mailer</a>, with each chunk of recipients going into one link, that you can pass onto other people to delegate the mass-mailing process.</p>
 
 </header>
 
-<div id="container" style="width:100px;">
-<div id="containerrow">
+<div id="container<?php if (isset($submit)) {echo "l";}?>m">
 
 <?php		
 	if (isset($submit)) {
-		echo '<div id="left">';
+		echo '<div id="left" style="white-space: nowrap;">';
 		echo '<h2>Links</h2>';
 		echo $output;
 		echo '</div>';
@@ -83,7 +82,7 @@
 
 <form method="post" id="hasInfo" action="./splitter">
 
-<div id="middle">
+<div id="middle" style="float: right;">
 <section>
 <h1>Recipients</h1>
 <textarea name="recipients" id="recipients" class="resizable" rows="15" cols="52" wrap="off" required="required" title="Remember, one recipient per line!">
@@ -102,7 +101,6 @@ people each, with each chunk used to generate a link populating a mass-mailer fo
 
 </form>
 
-</div>
 </div>
 
 <footer>

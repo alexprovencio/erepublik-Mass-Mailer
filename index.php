@@ -128,7 +128,7 @@
 
 <body>
 <header>
-<h1 id="title">lietk12's <?php if ($inputType != "post") {echo "Bookmarkable ";} ?>Mass Mailer (v0.7.1)</h1>
+<h1 id="title">lietk12's <?php if ($inputType != "post") {echo "Bookmarkable ";} ?>Mass Mailer (v0.7.2)</h1>
 <p id="tools"><?php if ($inputType == "post") {links( "mm" );} else {links( "bmm" );} ?></p>
 
 <?php
@@ -146,8 +146,7 @@
 ?>
 </header>
 
-<div id="container">
-<div id="containerrow">
+<div id="container<?php if ($outputmode != "self" && $outputmode != "new" && isset($submit)) {echo "l";}?>mr">
 
 <?php		
 	if ($outputmode != "self" && $outputmode != "new" && isset($submit)) {
@@ -223,7 +222,6 @@ for ($i = 0; $i < $fieldcount; $i++) {
 
 </form>
 
-</div>
 </div>
 
 <footer>

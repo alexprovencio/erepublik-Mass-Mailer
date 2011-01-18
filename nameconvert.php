@@ -57,16 +57,15 @@
 <header>
 <h1 id="title">lietk12's Transmogrifier</h1>
 <p id="tools"><?php links( "t" )?></p>
-<p class="centered">This is a small tool that you can use to convert a list of player names into profile IDs, or vice versa. Converting player names to profile IDs is useful if you want to save this list for future use on the mass mailer and want to be able to use it conveniently, even when the API is down or being suuuuuuuper-slow. You might want to convert profile IDs into player names if you want to get a list of names for use in replacement fields in the mass mailer. Or maybe you have your own use unrelated to mass mailing. Whatever works for you.</p>
+<p id="description">This is a small tool that you can use to convert a list of player names into profile IDs, or vice versa. Converting player names to profile IDs is useful if you want to save this list for future use on the mass mailer and want to be able to use it conveniently, even when the API is down or being suuuuuuuper-slow. You might want to convert profile IDs into player names if you want to get a list of names for use in replacement fields in the mass mailer. Or maybe you have your own use unrelated to mass mailing. Whatever works for you.</p>
 
 </header>
 
-<div id="container" style="width:100px;">
-<div id="containerrow">
+<div id="container<?php if (isset($submit)) {echo "l";}?>m" <?php if (isset($submit)) {echo 'style="width: 51em;"';}?>>
 
 <?php		
 	if (isset($submit)) {
-		echo '<div id="left" style="white-space:nowrap;">';
+		echo '<div id="left" style="white-space:nowrap; width:16em; overflow:auto;">';
 		echo '<h2>Result</h2>';
 		echo $output;
 		echo '</div>';
@@ -75,7 +74,7 @@
 
 <form method="post" id="hasInfo" action="./nameconvert">
 
-<div id="middle">
+<div id="middle" style="float:right;">
 <section>
 <h1>Player Names/Profile IDs</h1>
 <textarea name="recipients" id="recipients" class="resizable" rows="15" cols="52" wrap="off" required="required" title="Remember, one recipient per line! Also, profile IDs should be of the form '#profileID', e.g. #1242030">
@@ -98,7 +97,6 @@ from the input.
 
 </form>
 
-</div>
 </div>
 
 <footer>

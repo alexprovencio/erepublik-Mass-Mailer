@@ -4,8 +4,6 @@ body
 	font-family: Segoe UI, 'SegoeUINormal', sans-serif;
 	font-size: 100%;
 	line-height: 1.5;
-	margin-left: 80px;
-	margin-right: 80px;
 	color: #302226;
 }
 
@@ -56,6 +54,7 @@ p
 	font-size: 0.9em;
 }
 
+
 ul
 {
 	margin-left: 1em;
@@ -66,6 +65,12 @@ ul
 #description, #tools, p.centered
 {
 	text-align: center;
+}
+
+#description
+{
+	margin-left: 10em;
+	margin-right: 10em;
 }
 
 a:link
@@ -105,18 +110,28 @@ code
 
 #recipients
 {
-	display:block;
 	white-space: nowrap;
+	display: block;
+	width: 100%;
 }
 
 #subject
 {
 	font-family: monospace;
+	display: block;
+	width: 100%;
 }
 
 #message
 {
-	display:block;
+	display: block;
+	width: 100%;
+}
+
+#field
+{
+	display: block;
+	width: 100%;
 }
 
 .profileLink
@@ -127,8 +142,11 @@ code
 .submit
 {
 	float: none;
-	display: block;
 	margin: 10px auto;
+	display: block;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 div.grippie
@@ -144,7 +162,6 @@ div.grippie
 
 .resizable
 {
-	display:block;
 	margin-bottom:0pt;
 	height: 20%;
 }
@@ -155,60 +172,67 @@ footer
 	text-align: center;
 }
 
-#container
+#containerlm
 {
-	border-left: 1px solid black;
-	display: table;
-	width: 980px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 1em;
-	margin-bottom: 1em;
-	
-	/*Gradient background*/
-	/* fallback (Opera) */
-	background: #FFFFFF;
-	/* Mozilla: */
-	background: -moz-linear-gradient(top, white, white 80%, #D0D0D0);
-	/*Chrome, Safari:*/
-	background: -webkit-gradient(linear, left 80%, left bottom, from(#FFFFFF), to(#D0D0D0));
-	/* MSIE */
-	filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#FFFFFF', EndColorStr='#F0F0F0', GradientType=0);
+	width: 39em;
+	margin: 1em auto;
+	overflow: auto;
 }
 
-#containerrow
+#containerm
 {
-	outline: none;
-	border: none;
-	display: table-row;
+	width: 31em;
+	margin: 1em auto;
+	overflow: auto;
+}
+
+#containermr
+{
+	width: 64.5em;
+	margin: 1em auto;
+	overflow: auto;
+}
+
+#containerlmr
+{
+	width: 72em;
+	margin: 1em auto;
+	overflow: auto;
 }
 
 #left, #middle, #right
 {
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
-	display: table-cell;
-	padding-left: 0.5em;
-	padding-right: 0.5em;
-	padding-top: 0em;
-	padding-bottom: 0em;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+	padding: 0em 1em;
+	background-color: #E7F5FF;
+	border: 1px solid #CDE5EF;
 }
 
 #left
 {
 	text-align: center;
-	border-right: 1px solid black;
+	width: 4.4em;
+	float: left;
 }
 
 #middle
 {
-	border-right: 1px solid black
+	width: 28em;
+	float: left;
+	text-align: center;
 }
 
 #right
 {
 	text-align: left;
-	border-right: 1px solid black;
+	width: 29.8em;
+	float: right;
+}
+
+div.clear
+{
+	clear: both;
 }
 
 .hide
