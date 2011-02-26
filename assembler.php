@@ -5,7 +5,7 @@ function assemble( $profileIDs, $subject, $message, $replacements )
 	// Walk through the profile IDs, and generate an array of data-less PM URLs, an array of message subjects, and an array of message bodies; don't generate anything for blank profile ID entries.
 	for ($i = 0; $i < count($profileIDs); $i++) {
 		if ($profileIDs[$i] != "") {
-			$outputs[$i] = "http://www.erepublik.com/en/messages/compose/" . $profileIDs[$i];
+			$outputs[$i] = "http://www.erepublik.com/en/main/messages-compose/" . $profileIDs[$i];
 			$subjects[$i] = $subject;
 			$messages[$i] = $message;
 		} else {
@@ -39,7 +39,7 @@ function assemble( $profileIDs, $subject, $message, $replacements )
 	// Assemble data-less URLs with subjects and messages, as long as the URLs exist
 	for ($i = 0; $i < count($profileIDs); $i++) {
 		if ($outputs[$i] != "") {
-			$outputs[$i] .= "?message_subject=" . $subjects[$i] . "&message_body=" . $messages[$i];
+			$outputs[$i] .= "?citizen_subject=" . $subjects[$i] . "&citizen_message=" . $messages[$i];
 		}
 	}
 	

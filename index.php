@@ -133,7 +133,7 @@
 
 <?php
 	if ($inputType == "post") {
-		echo '<p id="description">This mass mailer is a stand-alone alternative to <a href="http://erep.thepenry.net/mailer.php" class="testing">AndraX2000\'s mass mailer</a>.';
+		echo '<p id="description">This mass mailer is a stand-alone alternative to <a href="http://erep.thepenry.net/mailer.php" class="testing">AndraX2000\'s mass mailer</a>. It requires that you install a greasemonkey script like <a href="http://eusaforums.com/forum/index.php/topic,4188.0.html">this one</a> so that your message forms will be properly pre-filled for you. ';
 		// If the url has string length of 8000 or more, don't offer this option
 		if (strlen( $params ) < 8000) {
 			echo '  For a version which allows you to bookmark specific recipients/subjects/messages, click <a href="./?input=get&amp;' . $params . '">here</a>.</p>';
@@ -170,8 +170,8 @@
 <input type="text" name="subject" id="subject" value="<?php echo $subject; ?>" size="54" maxlength="50" placeholder="This is, like, the subject, yo!" title="Your subject must be at most 50 characters long." />
 
 <h2>Message:</h2>
-<textarea name="message" id="message" class="autoresize" rows="10" cols="52" maxlength="2000" wrap="soft" placeholder="Given the existence as uttered forth in the public works of Puncher and Wattmann of a personal God quaquaquaqua with white beard quaquaquaqua outside time without extension who from the heights of divine apathia divine athambia divine aphasia loves us dearly with some exceptions for reasons unknown but" title="Unless you disabled javascript, this box will autoresize to fit your message.  Your message must be shorter than 2000 characters.">
-<?php echo $message; ?></textarea>
+<textarea name="message" id="message" class="autoresize" rows="10" cols="52" maxlength="500" wrap="soft" placeholder="Given the existence as uttered forth in the public works of 
+Puncher and Wattmann of a personal God quaquaquaqua with white beard quaquaquaqua outside time without extension who from the heights of divine apathia divine athambia divine aphasia loves us dearly with some exceptions for reasons unknown but time will tell and suffers like the divine Miranda with those who for reasons unknown but time will tell are plunged in torment plunged in fire whose fire flames if that continues and who can doubt it will fire the firmament that is to say blast hell to heaven so blue still and calm so calm with a calm which even though intermittent is better than nothing but not so fast and considering what is more that as a result of the labors left unfinished crowned by the Acacacacademy of Anthropopopometry of Essy-in-Possy of Testew and Cunard it is established beyond all doubt all other doubt than that which clings to the labors of men that as a result of the labors unfinished of Testew and Cunnard it is established as hereinafter" title="Unless you disabled javascript, this box will autoresize to fit your message.  Your message must be shorter than 500 characters."><?php echo $message; ?></textarea>
 </section>
 <section>
 <h1>Options</h1>

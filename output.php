@@ -48,7 +48,7 @@ if ((strlen( $recipients ) == 0) && (strlen( $message ) == 0) && (strlen( $subje
 					<link rel="stylesheet" href="webfonts/stylesheet.css" type="text/css" charset="utf-8" />
 				</head>
 				
-				<body>
+				<body id="documentation">
 					<header>
 					<h1>Output.php Documentation</h1>
 					<p>Hi, you probably found me out of curiosity or malformed code or something. In any case, you might be interested in how I work (I am the component of lietk12\'s project who processes web inputs to prepare them for assembly into a list of links).</p>
@@ -65,7 +65,7 @@ if ((strlen( $recipients ) == 0) && (strlen( $message ) == 0) && (strlen( $subje
 						<li>Player URLs which end in the player\'s ID, like <code>http://www.erepublik.com/en/citizen/profile/' . rand(2, 4225400) . '</code>, <code>http://www.erepublik.com/en/messages/compose/' . rand(2, 4225400) . '</code>, <code>http://economy.erepublik.com/en/citizen/donate/' . rand(2, 4225400) . '</code>, <code>http://economy.erepublik.com/en/citizen/donate/list/' . rand(2, 4225400) . '</code>, etc. If you have some other kind of URL with the ID following a <code>?</code>, <code>/</code>, or <code>=</code>, it should work, too. For those of you who know regexes, the pattern I use to detect URLs is <code>/^http.*[/?=]([0-9]+).*$/</code>.</li>
 					</ul>
 					<p>By the way, I also ignore leading or trailing whitespace and empty lines. Thusly is an example of a list of recipients that I can work with:</p>
-					<code style="display: block; white-space: pre-line;">';
+					<code style="display: block; white-space: pre; overflow: auto;">';
 					$listSize = rand(5, 40);
 					for ($i = 0; $i < $listSize; $i++) {
 						$recipientType = rand(0, 100);
